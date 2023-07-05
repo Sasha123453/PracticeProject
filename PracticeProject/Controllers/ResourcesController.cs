@@ -59,14 +59,12 @@ namespace PracticeProject.Controllers
         {
             var result = await (from comment in _context.Comments
                                 join user in _context.Users
-                                on new { ResourceId = comment.ResourceId, UserId = comment.UserId }
-                                equals new { ResourceId = id, UserId = user.Id }
-                                into resourceGroup
-                                from commentWithNickname in resourceGroup.DefaultIfEmpty()
+                                on comment.UserId equals user.Id
+                                where comment.ResourceId == id
                                 select new CommentWithNicknameModel
                                 {
                                     CommentText = comment.Text,
-                                    Nickname = commentWithNickname.Nickname,
+                                    Nickname = user.Nickname,
                                 })
                                 .Skip((page - 1) * pageSize)
                                 .Take(pageSize)
@@ -82,7 +80,7 @@ namespace PracticeProject.Controllers
         public async Task<IActionResult> LoadMoreComments(int resourceId, int page)
         {
             int commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
-            if (Math.Round((commentsAmount + 0.5) / pageSize) < page) return StatusCode(409);
+            if (Math.Round((commentsAmount / pageSize) + 0.5) < page) return StatusCode(409);
             var comments = await GetResourceCommentsFromDataSource(resourceId, page);
             return Json(comments);
         }
@@ -90,9 +88,10 @@ namespace PracticeProject.Controllers
         {
             try
             {
+                if (!User.Identity.IsAuthenticated) return StatusCode(400);
                 int commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
                 bool isNeedsToBeAdded = false;
-                if (Math.Round((commentsAmount + 0.5) / pageSize) < page || commentsAmount < pageSize) isNeedsToBeAdded = true;
+                if (Math.Round((commentsAmount / pageSize) + 0.5) < page || commentsAmount < pageSize) isNeedsToBeAdded = true;
                 string userId = _userManager.GetUserId(User);
                 ResourceCommentModel comment = new ResourceCommentModel(text, userId, id);
                 var user = await _userManager.FindByIdAsync(userId);
