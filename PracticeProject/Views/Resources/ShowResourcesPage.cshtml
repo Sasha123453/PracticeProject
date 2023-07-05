@@ -4,10 +4,11 @@
     <div>
         <input type="hidden" id="resourceId" value="@x.Id">
         <p>@x.Name</p>
+        <img href="@x.ImageName">
         <p>@x.ShortDescription</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
-            <input type="submit" value="Обратиться к боту" />
+            <input type="submit" value="Подробнее" />
         </form>
     </div>
 }

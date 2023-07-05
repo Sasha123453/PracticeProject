@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ri3zXMnuKk3/xTP64BifdOrVdZZIDIMGAnHz5FjNqKg=",
+  "Hash": "njMOIYj+dLREIhtDlHHNccC0G4ZBTvRPNF8nzAEroCk=",
   "Source": "PracticeProject",
   "BasePath": "_content/PracticeProject",
   "Mode": "Default",
@@ -1834,6 +1834,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\ResourceById.css"
+    },
+    {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\ShowResourcesPage.css",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "css/ShowResourcesPage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ShowResourcesPage.css"
     },
     {
       "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\site.css",
