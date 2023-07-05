@@ -1,0 +1,26 @@
+﻿@model ResourceByIdViewModel<CommentWithNicknameModel>
+<link href="~/css/ResourceById.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<section>
+    <p>@Model.Resource.Name</p>
+    <p>@Model.Resource.LongDescription</p>
+</section>
+<section>
+    <div class="send-comments">
+        <textarea id="comment-text" class="comment-text"></textarea>
+        <button class="comment-button" id="comment-button" onclick="sendComment()"></button>
+    </div>
+    <input type="hidden" id="page" value="1">
+    <input type="hidden" id="resourceId" value="@Model.Resource.Id">
+    <div class="comments" id="comments">
+        @foreach(var x in Model.ResourceCommentsWithNickname){
+            <div class="comment">
+                <span>@x.Nickname</span>
+                <span>@x.CommentText</span>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/ResourceById.js"></script>
+}
