@@ -13,14 +13,6 @@ $("send-button").click(function () {
         dataType: 'json',
         success: function (data) {
             debugger;
-            if (data.needsToBeAdded) {
-                $("#comments").append(`
-                <div class="comment">
-                    <span>${data.nickname}</span>
-                    <span>${text}</span>
-                </div
-                `);
-            }
         },
         error: function (xhr) {
             console.log(xhr.responseText);

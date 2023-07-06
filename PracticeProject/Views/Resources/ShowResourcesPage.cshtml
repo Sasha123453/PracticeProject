@@ -4,7 +4,7 @@
     <div>
         <input type="hidden" id="resourceId" value="@x.Id">
         <p>@x.Name</p>
-        <img href="@x.ImageName">
+        <img src="@Url.Content(x.ImageName)" alt="Image" />
         <p>@x.ShortDescription</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />

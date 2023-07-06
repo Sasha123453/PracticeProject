@@ -103,8 +103,8 @@ namespace PracticeProject.Controllers
         [HttpPost]
         public async Task<IActionResult> LoadMoreComments(int resourceId, int page)
         {
-            int commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
-            if (Math.Round((commentsAmount / pageSizeComments) + 0.5) < page) return StatusCode(409);
+            double commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
+            if (Math.Ceiling(commentsAmount / pageSizeComments) < page) return StatusCode(409);
             var comments = await GetResourceCommentsFromDataSource(resourceId, page);
             return Json(comments);
         }
@@ -113,9 +113,9 @@ namespace PracticeProject.Controllers
             try
             {
                 if (!User.Identity.IsAuthenticated) return StatusCode(400);
-                int commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
+                double commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
                 bool isNeedsToBeAdded = false;
-                if (Math.Round((commentsAmount / pageSizeComments) + 0.5) < page || commentsAmount < pageSizeComments) isNeedsToBeAdded = true;
+                if (Math.Ceiling(commentsAmount / pageSizeComments) < page || commentsAmount < pageSizeComments) isNeedsToBeAdded = true;
                 string userId = _userManager.GetUserId(User);
                 ResourceCommentModel comment = new ResourceCommentModel(text, userId, id);
                 var user = await _userManager.FindByIdAsync(userId);

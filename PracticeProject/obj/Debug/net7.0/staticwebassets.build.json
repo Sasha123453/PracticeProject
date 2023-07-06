@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ABzqz3sKY8TddyXmF+iXuSTs+OEHqky6vOkDuKnygw8=",
+  "Hash": "s1kCmzT4/C5v3zNKa3qSc5OMTHH8ZT19N/gCDzKfHGA=",
   "Source": "PracticeProject",
   "BasePath": "_content/PracticeProject",
   "Mode": "Default",
@@ -1902,6 +1902,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\screenshot.png",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "images/screenshot.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\screenshot.png"
+    },
+    {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\Снимок экрана (102).png",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "images/Снимок экрана (102).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Снимок экрана (102).png"
     },
     {
       "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceById.js",

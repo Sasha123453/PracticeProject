@@ -201,6 +201,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\screenshot.png",
+      "PackagePath": "staticwebassets\\images\\screenshot.png"
+    },
+    {
+      "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\Снимок экрана (102).png",
+      "PackagePath": "staticwebassets\\images\\Снимок экрана (102).png"
+    },
+    {
       "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceById.js",
       "PackagePath": "staticwebassets\\js\\ResourceById.js"
     },

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PracticeProject.Models
 {
@@ -13,6 +14,8 @@ namespace PracticeProject.Models
         public string Type { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public ResourceModel () { }
         public ResourceModel(string name, string shortDescription, string longDescription, string link, string imageName, string type)
         {
