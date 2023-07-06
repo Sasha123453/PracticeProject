@@ -9,101 +9,47 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PracticeProject
 build_property.RootNamespace = PracticeProject
-build_property.ProjectDir = C:\Users\shelk\Desktop\PracticeProject\PracticeProject\
+build_property.ProjectDir = C:\Users\User\Source\Repos\PracticeProject\PracticeProject\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\shelk\Desktop\PracticeProject\PracticeProject
+build_property.MSBuildProjectDirectory = C:\Users\User\Source\Repos\PracticeProject\PracticeProject
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Logout.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Home/Index.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Home/Privacy.cshtml]
+[C:/Users/User/Source/Repos/PracticeProject/PracticeProject/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/ResourceModels/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VNb2RlbHNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/ResourceModels/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VNb2RlbHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/ResourceModels/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VNb2RlbHNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/ResourceModels/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VNb2RlbHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/ResourceModels/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VNb2RlbHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Resources/ResourceById.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXFJlc291cmNlQnlJZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Resources/ResourceRequest.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXFJlc291cmNlUmVxdWVzdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Resources/ShowResourcesPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXFNob3dSZXNvdXJjZXNQYWdlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shelk/Desktop/PracticeProject/PracticeProject/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-rdwoav9z1e

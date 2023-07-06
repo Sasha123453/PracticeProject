@@ -125,7 +125,7 @@ namespace PracticeProject.Controllers
             }
             catch (Exception ex)
             {
-                string errorMessage = "An error occurred while processing the chat request. Details: " + ex.Message;
+                string errorMessage = "An error occurred while processing the chat request. Details1: " + ex.Message;
                 return Json(new { success = false, error = errorMessage });
             }
         }
