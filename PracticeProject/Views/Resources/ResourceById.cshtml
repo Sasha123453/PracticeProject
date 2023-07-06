@@ -1,28 +1,34 @@
 ﻿@model ResourceByIdViewModel<CommentWithNicknameModel>
 <link href="~/css/ResourceById.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<section>
-    <p>@Model.Resource.Name</p>
-    <img href="@Model.Resource.ImageName">
-    <p>@Model.Resource.LongDescription</p>
-    <a href="@Model.Resource.Link">Перейти на ресурс</a>
-</section>
-<section>
-    <div class="send-comments">
-        <textarea id="comment-text" class="comment-text"></textarea>
-        <button class="comment-button" id="comment-button" onclick="sendComment()"></button>
-    </div>
-    <input type="hidden" id="page" value="1">
-    <input type="hidden" id="resourceId" value="@Model.Resource.Id">
-    <div class="comments" id="comments">
-        @foreach(var x in Model.ResourceCommentsWithNickname){
-            <div class="comment">
-                <span>@x.Nickname</span>
-                <span>@x.CommentText</span>
-            </div>
-        }
-    </div>
-</section>
+<div class="sec-box">
+    <section class="first-section">
+        <div>
+            <p>@Model.Resource.Name</p>
+            <img href="@Model.Resource.ImageName">
+            <p>@Model.Resource.LongDescription</p>
+            <a href="@Model.Resource.Link">Перейти на ресурс</a>
+        </div>
+    </section>
+    <section class="second-sec">
+        <div class="send-comments">
+            <textarea id="comment-text" class="comment-text"></textarea>
+            <div><button class="comment-button" id="comment-button" onclick="sendComment()">Добавить комментарий</button></div>
+        </div>
+        <input type="hidden" id="page" value="1">
+        <input type="hidden" id="resourceId" value="@Model.Resource.Id">
+        <div class="comments" id="comments">
+            @foreach (var x in Model.ResourceCommentsWithNickname)
+            {
+                <div class="comment">
+                    <div><span>@x.Nickname</span></div>
+                    <div><span>@x.CommentText</span></div>
+                </div>
+            }
+        </div>
+    </section>
+</div>
+
 @section Scripts {
     <script src="~/js/ResourceById.js"></script>
 }

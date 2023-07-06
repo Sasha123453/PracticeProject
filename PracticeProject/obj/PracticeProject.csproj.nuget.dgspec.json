@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\PracticeProject.csproj": {}
+    "C:\\Users\\User\\source\\repos\\PracticeProject\\PracticeProject\\PracticeProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\PracticeProject.csproj": {
+    "C:\\Users\\User\\source\\repos\\PracticeProject\\PracticeProject\\PracticeProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\PracticeProject.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\PracticeProject\\PracticeProject\\PracticeProject.csproj",
         "projectName": "PracticeProject",
-        "projectPath": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\PracticeProject.csproj",
-        "packagesPath": "C:\\Users\\shelk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\obj\\",
+        "projectPath": "C:\\Users\\User\\source\\repos\\PracticeProject\\PracticeProject\\PracticeProject.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\PracticeProject\\PracticeProject\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\shelk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,8 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
-          "C:\\Users\\shelk\\source\\repos\\OpenAI-API-dotnet\\OpenAI_API\\bin": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -100,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
