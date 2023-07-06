@@ -1,17 +1,18 @@
 ﻿@model ResourceViewModel<ResourceModel>
 
-@foreach (var x in Model.Resources){
-    <div>
+<div class="resource-sec">@foreach (var x in Model.Resources){
+    <div class="resource-card">
         <input type="hidden" id="resourceId" value="@x.Id">
         <p>@x.Name</p>
-        <img href="@x.ImageName">
-        <p>@x.ShortDescription</p>
+            <img class="resource-pic" src="https://www.iphones.ru/wp-content/uploads/2020/08/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-93.jpg">
+        <p>afasfafaaaaaaaaaaaaaaaaa</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
             <input type="submit" value="Подробнее" />
         </form>
     </div>
 }
+</div>
 <div>
     @if (Model.TotalPages > 1)
     {
@@ -20,7 +21,7 @@
                 @if (Model.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = Model.CurrentPage - 1 })" aria-label="Previous">
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = Model.CurrentPage - 1 })" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Предыдущая</span>
                         </a>
@@ -30,14 +31,14 @@
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = i })">@i</a>
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = i })">@i</a>
                     </li>
                 }
 
                 @if (Model.CurrentPage < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = Model.CurrentPage + 1 })" aria-label="Next">
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = Model.CurrentPage + 1 })" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Следующая</span>
                         </a>

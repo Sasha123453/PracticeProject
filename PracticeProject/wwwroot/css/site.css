@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    
 }
 
 @media (min-width: 768px) {
@@ -15,8 +16,89 @@ html {
 html {
   position: relative;
   min-height: 100%;
+
+}
+
+header nav {
+    display: flex;
+    width: 100%;
+    border-radius: 20px;
+
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: rgb(235, 232, 217);
+}
+
+.navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {
+    background-color: red;
+    
+}
+
+.logo-flague 
+{
+    width: 80px;
+}
+
+.container-fluid {
+    margin: 0 auto;
+}
+
+.resource-sec {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    word-wrap: break-word;
+   
+    gap: 50px;
+}
+
+.resource-card {
+    max-width: 45%;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.resource-pic 
+{
+    max-width: 100%;
+}
+
+.pagination a {
+    background-color: #693423;
+    color: #f7f1d5;
+}
+
+.pagination li {
+    margin: 0 auto;
+}
+
+.pagination a:hover {
+    background-color: white;
+    color: #693423;
+}
+
+.pagination li a.active {
+    background-color: white;
+    color: #693423;
+}
+
+input[type=submit] {
+    background-color: #693423;
+    color: #f7f1d5;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 3px 2px black;
+}    
+
+
+    input[type=submit]:hover {
+        opacity: .9;
+        box-shadow: 1px 1px 2px black;
+    }
+
+footer div{
+    margin: 0 auto;
 }
