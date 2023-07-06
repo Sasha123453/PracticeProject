@@ -209,6 +209,10 @@
       "PackagePath": "staticwebassets\\images\\Снимок экрана (102).png"
     },
     {
+      "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\Снимок экрана (20).png",
+      "PackagePath": "staticwebassets\\images\\Снимок экрана (20).png"
+    },
+    {
       "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceById.js",
       "PackagePath": "staticwebassets\\js\\ResourceById.js"
     },

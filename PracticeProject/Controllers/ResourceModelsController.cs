@@ -102,17 +102,28 @@ namespace PracticeProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ShortDescription,LongDescription,Link,ImageName,Type,UpdatedAt,CreatedAt")] ResourceModel resourceModel)
+        public async Task<IActionResult> Edit(int id, ResourceModel resourceModel)
         {
             if (id != resourceModel.Id)
             {
                 return NotFound();
             }
-
+            resourceModel.UpdatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (resourceModel.ImageFile != null)
+                    {
+                        var fileName = Path.GetFileName(resourceModel.ImageFile.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await resourceModel.ImageFile.CopyToAsync(stream);
+                        }
+
+                        resourceModel.ImageName = "/images/" + fileName;
+                    }
                     _context.Update(resourceModel);
                     await _context.SaveChangesAsync();
                 }

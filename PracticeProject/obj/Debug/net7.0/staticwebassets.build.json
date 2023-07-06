@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "s1kCmzT4/C5v3zNKa3qSc5OMTHH8ZT19N/gCDzKfHGA=",
+  "Hash": "GP+vABPhZ62u5+p8p3LgTxIxG7anmQCXRzLji2FHfFI=",
   "Source": "PracticeProject",
   "BasePath": "_content/PracticeProject",
   "Mode": "Default",
@@ -1936,6 +1936,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Снимок экрана (102).png"
+    },
+    {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\images\\Снимок экрана (20).png",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "images/Снимок экрана (20).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Снимок экрана (20).png"
     },
     {
       "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceById.js",

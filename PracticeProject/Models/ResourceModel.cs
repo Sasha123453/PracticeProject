@@ -15,7 +15,7 @@ namespace PracticeProject.Models
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public ResourceModel () { }
         public ResourceModel(string name, string shortDescription, string longDescription, string link, string imageName, string type)
         {
