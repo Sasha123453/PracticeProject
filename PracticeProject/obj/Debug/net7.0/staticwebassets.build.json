@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "njMOIYj+dLREIhtDlHHNccC0G4ZBTvRPNF8nzAEroCk=",
+  "Hash": "ABzqz3sKY8TddyXmF+iXuSTs+OEHqky6vOkDuKnygw8=",
   "Source": "PracticeProject",
   "BasePath": "_content/PracticeProject",
   "Mode": "Default",
@@ -1836,6 +1836,23 @@
       "OriginalItemSpec": "wwwroot\\css\\ResourceById.css"
     },
     {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\ResourceRequest.css",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "css/ResourceRequest.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ResourceRequest.css"
+    },
+    {
       "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\ShowResourcesPage.css",
       "SourceId": "PracticeProject",
       "SourceType": "Discovered",
@@ -1902,6 +1919,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\ResourceById.js"
+    },
+    {
+      "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceRequest.js",
+      "SourceId": "PracticeProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\",
+      "BasePath": "_content/PracticeProject",
+      "RelativePath": "js/ResourceRequest.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\ResourceRequest.js"
     },
     {
       "Identity": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\site.js",

@@ -13,6 +13,7 @@ namespace PracticeProject.Models
         public string Type { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ResourceModel () { }
         public ResourceModel(string name, string shortDescription, string longDescription, string link, string imageName, string type)
         {
             Name = name;

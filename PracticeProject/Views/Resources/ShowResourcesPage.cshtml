@@ -13,6 +13,9 @@
     </div>
 }
 <div>
+    <a asp-controller="Resources" asp-action="ResourceRequest">Войти</a>
+</div>
+<div>
     @if (Model.TotalPages > 1)
     {
         <nav aria-label="Page navigation">
@@ -20,7 +23,7 @@
                 @if (Model.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = Model.CurrentPage - 1 })" aria-label="Previous">
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = Model.CurrentPage - 1 })" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Предыдущая</span>
                         </a>
@@ -30,14 +33,14 @@
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = i })">@i</a>
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = i })">@i</a>
                     </li>
                 }
 
                 @if (Model.CurrentPage < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowResourcePage", new { page = Model.CurrentPage + 1 })" aria-label="Next">
+                        <a class="page-link" href="@Url.Action("ShowResourcesPage", new { page = Model.CurrentPage + 1 })" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Следующая</span>
                         </a>

@@ -9,6 +9,7 @@ namespace PracticeProject.Areas.Identity.Data;
 public class ApplicationContext : IdentityDbContext<User>
 {
     public DbSet<ResourceModel> Resources { get; set; }
+    public DbSet<ResourceRequestModel> ResourceRequests { get; set; }
     public DbSet<ResourceCommentModel> Comments { get; set; }
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options)

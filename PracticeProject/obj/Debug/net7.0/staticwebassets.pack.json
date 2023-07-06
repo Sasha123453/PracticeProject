@@ -185,6 +185,10 @@
       "PackagePath": "staticwebassets\\css\\ResourceById.css"
     },
     {
+      "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\ResourceRequest.css",
+      "PackagePath": "staticwebassets\\css\\ResourceRequest.css"
+    },
+    {
       "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\css\\ShowResourcesPage.css",
       "PackagePath": "staticwebassets\\css\\ShowResourcesPage.css"
     },
@@ -199,6 +203,10 @@
     {
       "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceById.js",
       "PackagePath": "staticwebassets\\js\\ResourceById.js"
+    },
+    {
+      "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\ResourceRequest.js",
+      "PackagePath": "staticwebassets\\js\\ResourceRequest.js"
     },
     {
       "Id": "C:\\Users\\shelk\\Desktop\\PracticeProject\\PracticeProject\\wwwroot\\js\\site.js",
