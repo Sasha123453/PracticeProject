@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PracticeProject.Areas.Identity.Data;
 using PracticeProject.Models;
 using System.Drawing.Printing;
-
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace PracticeProject.Controllers
 {
@@ -14,7 +14,8 @@ namespace PracticeProject.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
-        const int pageSize = 8;
+        const int pageSizeComments = 8;
+        const int pageSizeResources = 10; 
         public ResourcesController(UserManager<User> userManager, ApplicationContext context)
         {
             _context = context;
@@ -24,18 +25,37 @@ namespace PracticeProject.Controllers
         {
             return View();
         }
+        public IActionResult ResourceRequest()
+        {
+            return View();
+        }
+        public async Task<IActionResult> SendRequest(string name, string link, string description)
+        {
+            try
+            {
+                string userId = _userManager.GetUserId(User);
+                ResourceRequestModel resourceRequest = new ResourceRequestModel(name, link, description, userId);
+                await _context.ResourceRequests.AddAsync(resourceRequest);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch (Exception ex) 
+            {
+                string errorMessage = "An error occurred while processing the chat request. Details: " + ex.Message;
+                return Json(new { success = false, error = errorMessage });
+            }
+        }
         public async Task<IActionResult> ShowResourcesPage(int page = 1)
         {
-            int pageSize = 10;
-            List<ResourceModel> resources = await GetResourcesFromDataSource();
-
-            IPagedList<ResourceModel> pagedResources = resources.ToPagedList(page, pageSize);
+            List<ResourceModel> resources = await GetResourcesFromDataSource(page);
+            double resourcesAmount = await GetResourcesAmountFromDataSource();
+            int totalPages = (int)Math.Ceiling(resourcesAmount / pageSizeResources);
 
             var viewModel = new ResourceViewModel<ResourceModel>
             {
-                Resources = pagedResources,
-                CurrentPage = pagedResources.PageNumber,
-                TotalPages = pagedResources.PageCount
+                Resources = resources,
+                CurrentPage = page,
+                TotalPages = totalPages
             };
 
             return View(viewModel);
@@ -51,9 +71,13 @@ namespace PracticeProject.Controllers
             };
             return View(viewModel);
         }
-        public async Task<List<ResourceModel>> GetResourcesFromDataSource()
+        public async Task<List<ResourceModel>> GetResourcesFromDataSource(int page)
         {
-            return await _context.Resources.ToListAsync();
+            return await _context.Resources.Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync();
+        }
+        public async Task<int> GetResourcesAmountFromDataSource()
+        {
+            return await _context.Resources.CountAsync();
         }
         public async Task<List<CommentWithNicknameModel>> GetResourceCommentsFromDataSource(int id, int page = 1)
         {
@@ -66,8 +90,8 @@ namespace PracticeProject.Controllers
                                     CommentText = comment.Text,
                                     Nickname = user.Nickname,
                                 })
-                                .Skip((page - 1) * pageSize)
-                                .Take(pageSize)
+                                .Skip((page - 1) * pageSizeComments)
+                                .Take(pageSizeComments)
                                 .ToListAsync();
             return result;
         }
@@ -79,8 +103,8 @@ namespace PracticeProject.Controllers
         [HttpPost]
         public async Task<IActionResult> LoadMoreComments(int resourceId, int page)
         {
-            int commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
-            if (Math.Round((commentsAmount / pageSize) + 0.5) < page) return StatusCode(409);
+            double commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
+            if (Math.Ceiling(commentsAmount / pageSizeComments) < page) return StatusCode(409);
             var comments = await GetResourceCommentsFromDataSource(resourceId, page);
             return Json(comments);
         }
@@ -89,9 +113,9 @@ namespace PracticeProject.Controllers
             try
             {
                 if (!User.Identity.IsAuthenticated) return StatusCode(400);
-                int commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
+                double commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
                 bool isNeedsToBeAdded = false;
-                if (Math.Round((commentsAmount / pageSize) + 0.5) < page || commentsAmount < pageSize) isNeedsToBeAdded = true;
+                if (Math.Ceiling(commentsAmount / pageSizeComments) < page || commentsAmount < pageSizeComments) isNeedsToBeAdded = true;
                 string userId = _userManager.GetUserId(User);
                 ResourceCommentModel comment = new ResourceCommentModel(text, userId, id);
                 var user = await _userManager.FindByIdAsync(userId);
@@ -101,7 +125,7 @@ namespace PracticeProject.Controllers
             }
             catch (Exception ex)
             {
-                string errorMessage = "An error occurred while processing the chat request. Details: " + ex.Message;
+                string errorMessage = "An error occurred while processing the chat request. Details1: " + ex.Message;
                 return Json(new { success = false, error = errorMessage });
             }
         }

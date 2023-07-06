@@ -1,17 +1,20 @@
 ﻿@model ResourceViewModel<ResourceModel>
 
-<div class="resource-sec">@foreach (var x in Model.Resources){
-    <div class="resource-card">
+@foreach (var x in Model.Resources){
+    <div>
         <input type="hidden" id="resourceId" value="@x.Id">
         <p>@x.Name</p>
-            <img class="resource-pic" src="https://www.iphones.ru/wp-content/uploads/2020/08/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-93.jpg">
-        <p>afasfafaaaaaaaaaaaaaaaaa</p>
+        <img src="@Url.Content(x.ImageName)" alt="Image" />
+        <p>@x.ShortDescription</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
             <input type="submit" value="Подробнее" />
         </form>
     </div>
 }
+</div>
+<div>
+    <a asp-controller="Resources" asp-action="ResourceRequest">Войти</a>
 </div>
 <div>
     @if (Model.TotalPages > 1)
