@@ -4,8 +4,8 @@
 <div class="sec-box">
     <section class="first-section">
         <div>
-            <p>@Model.Resource.Name</p>
-            <img href="@Model.Resource.ImageName">
+            <h2>@Model.Resource.Name</h2>
+            <img class="resource-pic" src="@Url.Content(Model.Resource.ImageName)" alt="Image" />
             <p>@Model.Resource.LongDescription</p>
             <a href="@Model.Resource.Link">Перейти на ресурс</a>
         </div>
@@ -21,7 +21,7 @@
             @foreach (var x in Model.ResourceCommentsWithNickname)
             {
                 <div class="comment">
-                    <div><span>@x.Nickname</span></div>
+                    <div><h3>@x.Nickname</h3></div>
                     <div><span>@x.CommentText</span></div>
                 </div>
             }

@@ -29,6 +29,7 @@ header nav {
 body {
     margin-bottom: 60px;
     background-color: rgb(235, 232, 217);
+    
 }
 
 .navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {
@@ -50,20 +51,38 @@ body {
     flex-wrap: wrap;
     margin-bottom: 40px;
     word-wrap: break-word;
-   
     gap: 50px;
 }
 
 .resource-card {
-    max-width: 45%;
+    width: 45%;
     margin: 0 auto;
-    border-radius: 10px;
     padding: 20px;
+}
+
+.resource-card > *:not(:last-child)
+{
+    margin-bottom: 30px;
+
+}
+
+h2
+{
+    font-size: 30px;
+}
+
+p {
+    font-size: 15px;
 }
 
 .resource-pic 
 {
     max-width: 100%;
+}
+
+*:focus {
+    box-shadow: none !important;
+    outline: 0;
 }
 
 .pagination a {
@@ -80,8 +99,9 @@ body {
     color: #693423;
 }
 
-.pagination li a.active {
+.page-item.active .page-link {
     background-color: white;
+    border-color: #693423;
     color: #693423;
 }
 
@@ -101,4 +121,9 @@ input[type=submit] {
 
 footer div{
     margin: 0 auto;
+}
+
+.active
+{
+    background-color: black;
 }

@@ -1,10 +1,11 @@
 ﻿@model ResourceViewModel<ResourceModel>
 
 @foreach (var x in Model.Resources){
-    <div>
+
+    <div class="resource-card">
         <input type="hidden" id="resourceId" value="@x.Id">
-        <p>@x.Name</p>
-        <img src="@Url.Content(x.ImageName)" alt="Image" />
+        <h2>@x.Name</h2>
+        <img class="resource-pic" src="@Url.Content(x.ImageName)" alt="Image" />
         <p>@x.ShortDescription</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
@@ -16,7 +17,7 @@
 <div>
     <a asp-controller="Resources" asp-action="ResourceRequest">Войти</a>
 </div>
-<div>
+<div class="container">
     @if (Model.TotalPages > 1)
     {
         <nav aria-label="Page navigation">

@@ -13,7 +13,6 @@ $(window).scroll(function () {
             },
             dataType: 'json',
             success: function (data) {
-                debugger;
                 for (const x of data) {
                     $("#comments").append(`
                 <div class="comment">
@@ -45,7 +44,6 @@ $("#comment-button").click(function () {
         },
         dataType: 'json',
         success: function (data) {
-            debugger;
             if (data.needsToBeAdded) {
                 $("#comments").append(`
                 <div class="comment">
