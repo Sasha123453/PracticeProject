@@ -240,6 +240,7 @@ namespace PracticeProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ResourceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -269,6 +270,10 @@ namespace PracticeProject.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FolderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageName")
                         .IsRequired()
@@ -409,8 +414,10 @@ namespace PracticeProject.Migrations
             modelBuilder.Entity("PracticeProject.Models.ResourceCommentModel", b =>
                 {
                     b.HasOne("PracticeProject.Models.ResourceModel", "Resource")
-                        .WithMany()
-                        .HasForeignKey("ResourceId");
+                        .WithMany("Comments")
+                        .HasForeignKey("ResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PracticeProject.Areas.Identity.Data.User", "User")
                         .WithMany()
@@ -447,6 +454,11 @@ namespace PracticeProject.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PracticeProject.Models.ResourceModel", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

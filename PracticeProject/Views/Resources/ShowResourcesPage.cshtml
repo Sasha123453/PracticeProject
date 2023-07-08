@@ -1,7 +1,6 @@
 ﻿@model ResourceViewModel<ResourceModel>
 
 @foreach (var x in Model.Resources){
-
     <div class="resource-card">
         <input type="hidden" id="resourceId" value="@x.Id">
         <h2>@x.Name</h2>

@@ -89,21 +89,23 @@ namespace PracticeProject.Controllers
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
                         string fileName = fileNameOrig;
                         int i = 1;
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}");
+                        if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
+                        var filePath = Path.Combine(path, fileName);
                         while (System.IO.File.Exists(filePath))
                         {
                             string fileNameEx = Path.GetFileNameWithoutExtension(fileNameOrig);
                             string ex = Path.GetExtension(fileNameOrig);
                             fileName = $"{fileNameEx}({i}){ex}";
                             i++;
-                            filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                            filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}", fileName);
                         }
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             await resourceModel.ImageFile.CopyToAsync(stream);
                         }
 
-                        resourceModel.ImageName = "/images/" + fileName;
+                        resourceModel.ImageName = $"/images/{resourceModel.FolderName}/" + fileName;
                         if (resourceModel.RequestId != null)
                         {
                             ResourceRequestModel request = await _context.ResourceRequests.FindAsync(resourceModel.RequestId);
@@ -170,7 +172,7 @@ namespace PracticeProject.Controllers
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
                         string fileName = fileNameOrig;
                         int i = 1;
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}", fileName);
                         while (System.IO.File.Exists(filePath))
                         {
                             string fileNameEx = Path.GetFileNameWithoutExtension(fileNameOrig);
@@ -187,6 +189,7 @@ namespace PracticeProject.Controllers
                         resourceModel.ImageName = "/images/" + fileName;
                     }
                     _context.Update(resourceModel);
+                    _context.Entry(resourceModel).Property(x => x.FolderName).IsModified = false;
                     _context.Entry(resourceModel).Property(x => x.UserId).IsModified = false;
                     _context.Entry(resourceModel).Property(x => x.CreatedAt).IsModified = false;
                     await _context.SaveChangesAsync();

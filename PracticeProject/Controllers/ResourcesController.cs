@@ -169,7 +169,7 @@ namespace PracticeProject.Controllers
                 var user = await _userManager.FindByIdAsync(userId);
                 await _context.Comments.AddAsync(comment);
                 await _context.SaveChangesAsync();
-                CommentWithNicknameAndIdModel model = new CommentWithNicknameAndIdModel()
+                CommentWithNicknameModel model = new CommentWithNicknameModel()
                 {
                     ResourceId = comment.ResourceId,
                     Nickname = user.Nickname,

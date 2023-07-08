@@ -19,12 +19,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using PracticeProject.Areas.Identity.Data;
+using PracticeProject.Models;
 
 namespace PracticeProject.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        private readonly GoogleCaptchaService _googleCaptchaService;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
@@ -36,7 +38,8 @@ namespace PracticeProject.Areas.Identity.Pages.Account
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            GoogleCaptchaService googleCaptchaService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace PracticeProject.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _googleCaptchaService = googleCaptchaService;
         }
 
         /// <summary>
@@ -101,6 +105,7 @@ namespace PracticeProject.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            public string Token { get; set; }
         }
 
 
@@ -121,8 +126,8 @@ namespace PracticeProject.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                var captcha = await _googleCaptchaService.VerifyToken(Input.Token);
+                if (result.Succeeded && captcha)
                 {
                     _logger.LogInformation("User created a new account with password.");
 

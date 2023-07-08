@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PracticeProject.Models;
+using System.Reflection.Emit;
 
 namespace PracticeProject.Areas.Identity.Data;
 
@@ -19,6 +20,10 @@ public class ApplicationContext : IdentityDbContext<User>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<ResourceCommentModel>()
+            .HasOne(p => p.Resource)
+            .WithMany(t => t.Comments)
+            .OnDelete(DeleteBehavior.Cascade);
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PracticeProject.Migrations
 {
     /// <inheritdoc />
-    public partial class one : Migration
+    public partial class again : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -169,6 +169,7 @@ namespace PracticeProject.Migrations
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
                     IsRejected = table.Column<bool>(type: "bit", nullable: false),
                     IsBeingWatched = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -192,9 +193,10 @@ namespace PracticeProject.Migrations
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LongDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FolderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RequestId = table.Column<int>(type: "int", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -206,8 +208,7 @@ namespace PracticeProject.Migrations
                         name: "FK_Resources_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Resources_ResourceRequests_RequestId",
                         column: x => x.RequestId,
@@ -223,7 +224,7 @@ namespace PracticeProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ResourceId = table.Column<int>(type: "int", nullable: true),
+                    ResourceId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -239,7 +240,8 @@ namespace PracticeProject.Migrations
                         name: "FK_Comments_Resources_ResourceId",
                         column: x => x.ResourceId,
                         principalTable: "Resources",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

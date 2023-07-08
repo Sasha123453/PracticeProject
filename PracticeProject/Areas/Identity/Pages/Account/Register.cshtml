@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Register";
 }
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Options
+@using PracticeProject.Models;
+@inject IOptions<GoogleCaptchaConfig> GoogleCaptchaConfig
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@GoogleCaptchaConfig.Value.SiteKey"></script>
 
 <h1>@ViewData["Title"]</h1>
 
@@ -17,6 +23,7 @@
                 <label asp-for="Input.Nickname">Nickname</label>
                 <span asp-validation-for="Input.Nickname" class="text-danger"></span>
             </div>
+            <input asp-for="Input.Token" type="hidden" id="token"/>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
@@ -66,7 +73,22 @@
         </section>
     </div>
 </div>
-
+<script>
+    function getToken() {
+        $(function () {
+            grecaptcha.ready(function () {
+                debugger;
+                grecaptcha.execute('@GoogleCaptchaConfig.Value.SiteKey', { action: 'submit' }).then(function (token) {
+                    document.getElementById('token').value = token;
+                });
+            });
+        });
+    }
+    setInterval(getToken, 115000);
+    $(function () {
+        getToken();
+    });
+</script>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

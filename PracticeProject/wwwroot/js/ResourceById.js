@@ -10,9 +10,9 @@ connection.on("NewComment", function (comment) {
         <div class="comment">
             <div class="comment-head">
                 <h3>${comment.nickname}</h3>
-                <span>${comment.createdAt}</span >
+                <span>${comment.createdAt}</span>
             </div>
-            <div><span>${comment.commentText}</span ></div >
+            <div><span>${comment.commentText}</span></div>
         </div>
         `);
     }
@@ -67,7 +67,6 @@ function loadMoreComments() {
                       </div>
                     `);
                 }
-                debugger;
                 isLoading = false;
                 page++;
             }

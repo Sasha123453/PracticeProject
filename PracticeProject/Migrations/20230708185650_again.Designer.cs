@@ -12,8 +12,8 @@ using PracticeProject.Areas.Identity.Data;
 namespace PracticeProject.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230708101616_one")]
-    partial class one
+    [Migration("20230708185650_again")]
+    partial class again
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,6 +243,7 @@ namespace PracticeProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ResourceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -272,6 +273,10 @@ namespace PracticeProject.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FolderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageName")
                         .IsRequired()
@@ -304,7 +309,6 @@ namespace PracticeProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -323,6 +327,9 @@ namespace PracticeProject.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -410,8 +417,10 @@ namespace PracticeProject.Migrations
             modelBuilder.Entity("PracticeProject.Models.ResourceCommentModel", b =>
                 {
                     b.HasOne("PracticeProject.Models.ResourceModel", "Resource")
-                        .WithMany()
-                        .HasForeignKey("ResourceId");
+                        .WithMany("Comments")
+                        .HasForeignKey("ResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PracticeProject.Areas.Identity.Data.User", "User")
                         .WithMany()
@@ -432,9 +441,7 @@ namespace PracticeProject.Migrations
 
                     b.HasOne("PracticeProject.Areas.Identity.Data.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Request");
 
@@ -450,6 +457,11 @@ namespace PracticeProject.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PracticeProject.Models.ResourceModel", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
