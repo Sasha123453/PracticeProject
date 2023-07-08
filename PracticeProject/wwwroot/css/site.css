@@ -29,6 +29,7 @@ header nav {
 body {
     margin-bottom: 60px;
     background-color: rgb(235, 232, 217);
+   
     
 }
 
@@ -72,7 +73,7 @@ h2
 }
 
 p {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .resource-pic 
@@ -100,9 +101,9 @@ p {
 }
 
 .page-item.active .page-link {
-    background-color: white;
+    background-color: black;
     border-color: #693423;
-    color: #693423;
+    color: #f7f1d5;
 }
 
 input[type=submit] {
@@ -111,6 +112,7 @@ input[type=submit] {
     border: none;
     border-radius: 5px;
     box-shadow: 2px 3px 2px black;
+    padding: 5px;
 }    
 
 
