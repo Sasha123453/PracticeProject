@@ -7,9 +7,11 @@ connection.on("NewComment", function (comment) {
     if (isLastPage && comment.resourceId == id) {
         $("#comments").append(`
         <div class="comment">
-            <div><h3>${comment.nickname}</h3></div>
-            <div><span>${comment.text}</span></div>
-            <div><span>${comment.createdAt}</span></div>
+            <div class="comment-head">
+                <h3>${x.nickname}</h3>
+                <span>${x.createdAt}</span >
+            </div>
+            <div><span>${x.text}</span ></div >
         </div>
         `);
     }
@@ -49,11 +51,13 @@ function loadMoreComments() {
             if (data.length > 0) {
                 for (const x of data) {
                     $("#comments").append(`
-                        <div class="comment">
-                            <div><h3>${x.nickname}</h3></div>
-                            <div><span>${x.commentText}</span></div>
-                            <div><span>${x.createdAt}</span></div>
+                     <div class="comment">
+                        <div class="comment-head">
+                            <h3>${x.nickname}</h3>
+                            <span>${x.createdAt}</span >
                         </div>
+                        <div><span>${x.commentText}</span ></div >
+                      </div>
                     `);
                 }
                 debugger;
