@@ -1,5 +1,47 @@
 ﻿.comment-head {
     display: flex;
     justify-content: space-between;
+    margin: 0;
 }
 
+.comment {
+    padding: 20px;
+    border: 1px solid #693423;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+h3 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 20px;
+}
+
+.first-section
+{
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.first-section > div > * 
+{
+    margin-bottom: 30px;
+}
+
+.send-comments {
+    margin-bottom: 40px;
+
+}
+.send-comments > div > button  {
+        background-color: #693423;
+        color: #f7f1d5;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 2px 3px 2px black;
+        padding: 5px;
+}
