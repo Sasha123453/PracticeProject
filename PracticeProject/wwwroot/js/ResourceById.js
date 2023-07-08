@@ -37,11 +37,12 @@ $(window).scroll(function () {
 });
 $(document).ready(function () {
     debugger;
-    var comments = $('#comments');
-    if (comments.length < 8) isLastPage = true;
+    const comments = document.getElementById('comments');
+    if (comments.childElementCount < 8) isLastPage = true;
 });
 
 function loadMoreComments() {
+    debugger;
     if (isLastPage) return;
     var urlParams = new URLSearchParams(window.location.search);
     var id = urlParams.get('Id');

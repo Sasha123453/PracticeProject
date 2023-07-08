@@ -138,7 +138,7 @@ namespace PracticeProject.Controllers
                                 {
                                     CommentText = comment.Text,
                                     Nickname = user.Nickname,
-                                    CreatedAt = comment.CreatedAt
+                                    CreatedAt = DateOnly.FromDateTime(comment.CreatedAt)
                                 })
                                 .Skip((page - 1) * pageSizeComments)
                                 .Take(pageSizeComments)
@@ -169,11 +169,12 @@ namespace PracticeProject.Controllers
                 var user = await _userManager.FindByIdAsync(userId);
                 await _context.Comments.AddAsync(comment);
                 await _context.SaveChangesAsync();
-                CommentWithNicknameModel model = new CommentWithNicknameModel()
+                CommentWithNicknameAndIdModel model = new CommentWithNicknameAndIdModel()
                 {
+                    ResourceId = comment.ResourceId,
                     Nickname = user.Nickname,
                     CommentText = comment.Text,
-                    CreatedAt = comment.CreatedAt
+                    CreatedAt = DateOnly.FromDateTime(comment.CreatedAt)
                 };
                 await _commentHubContext.Clients.All.SendAsync("NewComment", model);
                 return Json(new { success = true });
