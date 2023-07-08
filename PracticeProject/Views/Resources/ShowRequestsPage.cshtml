@@ -4,6 +4,8 @@
     @foreach (var x in Model.Resources)
     {
         var className = "request-block";
+        if (User.IsInRole("Admin")) className += " admin";
+        else className += " user";
         className += x.IsCompleted ? " completed" :
         x.IsRejected ? " rejected" :
         x.IsBeingWatched ? " watched" : " nothing";
@@ -13,8 +15,8 @@
             <p>@x.Link</p>
             <p>@x.Description</p>
             <input type="submit">
-            <button id="cancel-button">Отклонить заявку</button>
-            <button id="check-button">Заявка на рассмотрении</button>
+            <button class="cancel-button" id="cancel-button">Отклонить заявку</button>
+            <button class="check-button" id="check-button">Заявка на рассмотрении</button>
         </form>
     }
 </div>

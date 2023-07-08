@@ -14,10 +14,9 @@
     </section>
     <section class="second-sec">
         <div class="send-comments">
-            <textarea id="comment-text" class="comment-text"></textarea>
+            <input type="text" id="comment-text" class="comment-text">
             <div><button class="comment-button" id="comment-button">Добавить комментарий</button></div>
         </div>
-        <input type="hidden" id="page" value="1">
         <input type="hidden" id="resourceId" value="@Model.Resource.Id">
         <div class="comments" id="comments">
             @foreach (var x in Model.ResourceCommentsWithNickname)

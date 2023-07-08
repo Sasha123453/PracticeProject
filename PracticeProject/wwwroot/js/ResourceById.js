@@ -42,7 +42,7 @@ function loadMoreComments() {
         type: 'POST',
         data: {
             resourceId: id,
-            page: page
+            page: page + 1
         },
         dataType: 'json',
         success: function (data) {

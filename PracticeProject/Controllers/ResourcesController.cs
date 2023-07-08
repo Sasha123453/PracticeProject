@@ -81,7 +81,9 @@ namespace PracticeProject.Controllers
         }
         public async Task<List<ResourceRequestModel>> GetRequestsFromDataSource(int page)
         {
-            return await _context.ResourceRequests.Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync();
+            if (User.IsInRole("Admin")) { return await _context.ResourceRequests.Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync(); }
+            string userId = _userManager.GetUserId(User);
+            return await _context.ResourceRequests.Where(x => x.UserId == userId).Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync();
         }
         public async Task<IActionResult> ShowRequestsPage(int page = 1)
         {
