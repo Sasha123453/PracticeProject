@@ -42,7 +42,7 @@ namespace PracticeProject.Controllers
                     return Json(new { success = false, error = "Проблемы с каптчей" });
                 }
                 string userId = _userManager.GetUserId(User);
-                ResourceRequestModel resourceRequest = new ResourceRequestModel(name, link, description, userId);
+                ResourceRequestModel resourceRequest = new ResourceRequestModel(name, description, link, userId);
                 await _context.ResourceRequests.AddAsync(resourceRequest);
                 await _context.SaveChangesAsync();
                 return Json(new { success = true });
