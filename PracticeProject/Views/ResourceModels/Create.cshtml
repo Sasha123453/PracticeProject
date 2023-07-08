@@ -4,11 +4,13 @@
     string name = null;
     string desc = null;
     string link = null;
+    int? id = null;
     if (Model != null)
     {
         name = Model.Name;
         desc = Model.ShortDescription;
         link = Model.Link;
+        id = Model.RequestId;
     }
     ViewData["Title"] = "Create";
 }
@@ -41,6 +43,7 @@
                 <input asp-for="Link" class="form-control" value="@link"/>
                 <span asp-validation-for="Link" class="text-danger"></span>
             </div>
+            <input asp-for="RequestId" type="hidden" value="@id"/>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <input asp-for="Type" class="form-control" />

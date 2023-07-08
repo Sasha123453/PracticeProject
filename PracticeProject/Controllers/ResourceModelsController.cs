@@ -54,15 +54,12 @@ namespace PracticeProject.Controllers
         public async Task<IActionResult> CreateRequestedResource(int id)
         {
             ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
-            request.IsCompleted = true;
-            request.IsBeingWatched = false;
-            _context.Update(request);
-            await _context.SaveChangesAsync();
             ResourceModel resource = new ResourceModel()
             {
                 Name = request.Name,
                 Link = request.Link,
-                ShortDescription = request.Description
+                ShortDescription = request.Description,
+                RequestId = request.Id,
             };
             return View("Create", resource);
         }
@@ -92,8 +89,8 @@ namespace PracticeProject.Controllers
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                     while (System.IO.File.Exists(filePath))
                     {
-                        i++;
                         fileName = $"{fileName}({i})";
+                        i++;
                         filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                     }
                     using (var stream = new FileStream(filePath, FileMode.Create))
@@ -102,11 +99,17 @@ namespace PracticeProject.Controllers
                     }
 
                     resourceModel.ImageName = "/images/" + fileName;
-                }
+                    if (resourceModel.RequestId != null)
+                    {
+                        ResourceRequestModel request = await _context.ResourceRequests.FindAsync(resourceModel.RequestId);
+                        request.IsCompleted = true;
+                        _context.Update(request);
+                    }
 
-                _context.Add(resourceModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    _context.Add(resourceModel);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(resourceModel);
         }
@@ -150,8 +153,8 @@ namespace PracticeProject.Controllers
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                         while (System.IO.File.Exists(filePath))
                         {
-                            i++;
                             fileName = $"{fileName}({i})";
+                            i++;
                             filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                         }
                         using (var stream = new FileStream(filePath, FileMode.Create))
