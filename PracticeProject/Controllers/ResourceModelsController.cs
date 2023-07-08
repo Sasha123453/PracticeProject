@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PracticeProject.Areas.Identity.Data;
 using PracticeProject.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace PracticeProject.Controllers
 {
     public class ResourceModelsController : Controller
     {
         private readonly ApplicationContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ResourceModelsController(ApplicationContext context)
+        public ResourceModelsController(ApplicationContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ResourceModels
@@ -78,6 +81,8 @@ namespace PracticeProject.Controllers
         {
             resourceModel.CreatedAt = DateTime.Now;
             resourceModel.UpdatedAt = DateTime.Now;
+            string userId = _userManager.GetUserId(User);
+            resourceModel.UserId = userId;
             if (ModelState.IsValid)
             {
                 if (resourceModel.ImageFile != null)

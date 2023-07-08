@@ -239,7 +239,7 @@ namespace PracticeProject.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ResourceId")
+                    b.Property<int?>("ResourceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -286,6 +286,9 @@ namespace PracticeProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -297,7 +300,15 @@ namespace PracticeProject.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Resources");
                 });
@@ -397,9 +408,7 @@ namespace PracticeProject.Migrations
                 {
                     b.HasOne("PracticeProject.Models.ResourceModel", "Resource")
                         .WithMany()
-                        .HasForeignKey("ResourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ResourceId");
 
                     b.HasOne("PracticeProject.Areas.Identity.Data.User", "User")
                         .WithMany()
@@ -408,6 +417,23 @@ namespace PracticeProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Resource");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PracticeProject.Models.ResourceModel", b =>
+                {
+                    b.HasOne("PracticeProject.Models.ResourceRequestModel", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId");
+
+                    b.HasOne("PracticeProject.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Request");
 
                     b.Navigation("User");
                 });

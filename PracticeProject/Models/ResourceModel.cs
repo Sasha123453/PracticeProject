@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PracticeProject.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PracticeProject.Models
@@ -12,6 +13,10 @@ namespace PracticeProject.Models
         public string Link { get; set; }
         public string ImageName { get; set; }
         public string Type { get; set; }
+        public virtual User? User { get; set; }
+        public string? UserId { get; set; }
+        public virtual ResourceRequestModel? Request { get; set; }
+        public int? RequestId { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
         [NotMapped]

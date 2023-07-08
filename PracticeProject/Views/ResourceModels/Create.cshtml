@@ -1,11 +1,19 @@
 ﻿@model PracticeProject.Models.ResourceModel
 
 @{
+    string name = null;
+    string desc = null;
+    string link = null;
+    if (Model != null)
+    {
+        name = Model.Name;
+        desc = Model.ShortDescription;
+        link = Model.Link;
+    }
     ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
-
 <h4>ResourceModel</h4>
 <hr />
 <div class="row">
@@ -15,12 +23,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" value="@Model.Name" />
+                <input asp-for="Name" class="form-control" value="@name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShortDescription" class="control-label"></label>
-                <input asp-for="ShortDescription" class="form-control" />
+                <input asp-for="ShortDescription" class="form-control" value="@desc"/>
                 <span asp-validation-for="ShortDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Link" class="control-label"></label>
-                <input asp-for="Link" class="form-control" value="@Model.Link"/>
+                <input asp-for="Link" class="form-control" value="@link"/>
                 <span asp-validation-for="Link" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -9,8 +9,9 @@ namespace PracticeProject.Models
         public virtual User User { get; set; }
         public string Text { get; set; }
         public virtual ResourceModel Resource { get; set; }
-        public int ResourceId { get; set; }
+        public int? ResourceId { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ResourceCommentModel() { }
         public ResourceCommentModel(string text, string userId, int resourceId) 
         {
             Text = text;
