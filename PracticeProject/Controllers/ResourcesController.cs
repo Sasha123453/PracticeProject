@@ -7,6 +7,7 @@ using PracticeProject.Areas.Identity.Data;
 using PracticeProject.Models;
 using System.Drawing.Printing;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using Microsoft.AspNetCore.SignalR;
 
 namespace PracticeProject.Controllers
 {
@@ -14,25 +15,32 @@ namespace PracticeProject.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly GoogleCaptchaService _googleCaptchaService;
+        private readonly IHubContext<CommentHub> _commentHubContext;
         const int pageSizeComments = 8;
         const int pageSizeResources = 10; 
-        public ResourcesController(UserManager<User> userManager, ApplicationContext context)
+        public ResourcesController(UserManager<User> userManager, ApplicationContext context, GoogleCaptchaService googleCaptchaService, IHubContext<CommentHub> commenthubContext)
         {
             _context = context;
             _userManager = userManager;
+            _googleCaptchaService = googleCaptchaService;
+            _commentHubContext = commenthubContext;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        [Authorize]
         public IActionResult ResourceRequest()
         {
             return View();
         }
-        public async Task<IActionResult> SendRequest(string name, string link, string description)
+        [Authorize]
+        public async Task<IActionResult> SendRequest(string name, string link, string description, string token)
         {
             try
             {
+                var captchaResult = await _googleCaptchaService.VerifyToken(token);
+                if (!captchaResult)
+                {
+                    return Json(new { success = false, error = "Проблемы с каптчей." });
+                }
                 string userId = _userManager.GetUserId(User);
                 ResourceRequestModel resourceRequest = new ResourceRequestModel(name, link, description, userId);
                 await _context.ResourceRequests.AddAsync(resourceRequest);
@@ -71,9 +79,32 @@ namespace PracticeProject.Controllers
             };
             return View(viewModel);
         }
+        public async Task<List<ResourceRequestModel>> GetRequestsFromDataSource(int page)
+        {
+            return await _context.ResourceRequests.Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync();
+        }
+        public async Task<IActionResult> ShowRequestsPage(int page = 1)
+        {
+            List<ResourceRequestModel> requests = await GetRequestsFromDataSource(page);
+            double requestsAmount = await GetRequestsAmountFromDataSource();
+            int totalPages = (int)Math.Ceiling(requestsAmount / pageSizeResources);
+
+            var viewModel = new ResourceViewModel<ResourceRequestModel>
+            {
+                Resources = requests,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(viewModel);
+        }
         public async Task<List<ResourceModel>> GetResourcesFromDataSource(int page)
         {
             return await _context.Resources.Skip((page - 1) * pageSizeResources).Take(pageSizeResources).ToListAsync();
+        }
+        public async Task<int> GetRequestsAmountFromDataSource()
+        {
+            return await _context.ResourceRequests.CountAsync();
         }
         public async Task<int> GetResourcesAmountFromDataSource()
         {
@@ -89,6 +120,7 @@ namespace PracticeProject.Controllers
                                 {
                                     CommentText = comment.Text,
                                     Nickname = user.Nickname,
+                                    CreatedAt = comment.CreatedAt
                                 })
                                 .Skip((page - 1) * pageSizeComments)
                                 .Take(pageSizeComments)
@@ -104,24 +136,23 @@ namespace PracticeProject.Controllers
         public async Task<IActionResult> LoadMoreComments(int resourceId, int page)
         {
             double commentsAmount = await GetResourceCommentsAmountFromDataSource(resourceId);
-            if (Math.Ceiling(commentsAmount / pageSizeComments) < page) return StatusCode(409);
+            if (Math.Ceiling(commentsAmount / pageSizeComments) < page) return Json(new { success = true });
             var comments = await GetResourceCommentsFromDataSource(resourceId, page);
             return Json(comments);
         }
+        [Authorize]
         public async Task<IActionResult> SendComment(string text, int id, int page)
         {
             try
             {
-                if (!User.Identity.IsAuthenticated) return StatusCode(400);
                 double commentsAmount = await GetResourceCommentsAmountFromDataSource(id);
-                bool isNeedsToBeAdded = false;
-                if (Math.Ceiling(commentsAmount / pageSizeComments) < page || commentsAmount < pageSizeComments) isNeedsToBeAdded = true;
                 string userId = _userManager.GetUserId(User);
                 ResourceCommentModel comment = new ResourceCommentModel(text, userId, id);
                 var user = await _userManager.FindByIdAsync(userId);
                 await _context.Comments.AddAsync(comment);
                 await _context.SaveChangesAsync();
-                return Json(new { success = true, nickname = user.Nickname, needsToBeAdded = isNeedsToBeAdded });
+                await _commentHubContext.Clients.All.SendAsync("NewComment", comment);
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {

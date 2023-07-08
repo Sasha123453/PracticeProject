@@ -9,6 +9,8 @@ namespace PracticeProject.Models
         public string Description { get; set; }
         public string Link { get; set; }
         public bool IsCompleted { get; set; }
+        public bool IsRejected { get; set; }
+        public bool IsBeingWatched { get; set; }
         public virtual User User { get; set; }
         public string UserId { get; set; }
         public ResourceRequestModel(string name, string description, string link, string userId) 
@@ -18,6 +20,8 @@ namespace PracticeProject.Models
             Link = link;
             UserId = userId;
             IsCompleted = false;
+            IsRejected = false;
+            IsBeingWatched = false;
         }
     }
 }

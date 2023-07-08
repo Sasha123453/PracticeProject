@@ -1,6 +1,8 @@
 ﻿@model ResourceByIdViewModel<CommentWithNicknameModel>
 <link href="~/css/ResourceById.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<script src="/signalr/hubs"></script>
 <div class="sec-box">
     <section class="first-section">
         <div>
@@ -13,7 +15,7 @@
     <section class="second-sec">
         <div class="send-comments">
             <textarea id="comment-text" class="comment-text"></textarea>
-            <div><button class="comment-button" id="comment-button" onclick="sendComment()">Добавить комментарий</button></div>
+            <div><button class="comment-button" id="comment-button">Добавить комментарий</button></div>
         </div>
         <input type="hidden" id="page" value="1">
         <input type="hidden" id="resourceId" value="@Model.Resource.Id">
@@ -23,6 +25,7 @@
                 <div class="comment">
                     <div><h3>@x.Nickname</h3></div>
                     <div><span>@x.CommentText</span></div>
+                    <div><span>@x.CreatedAt</span></div>
                 </div>
             }
         </div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PracticeProject.Areas.Identity.Data;
@@ -46,6 +47,23 @@ namespace PracticeProject.Controllers
         }
 
         // GET: ResourceModels/Create
+        [HttpPost]
+        public async Task<IActionResult> CreateRequestedResource(int id)
+        {
+            ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+            request.IsCompleted = true;
+            request.IsBeingWatched = false;
+            _context.Update(request);
+            await _context.SaveChangesAsync();
+            ResourceModel resource = new ResourceModel()
+            {
+                Name = request.Name,
+                Link = request.Link,
+                ShortDescription = request.Description
+            };
+            return View("Create", resource);
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -65,7 +83,14 @@ namespace PracticeProject.Controllers
                 if (resourceModel.ImageFile != null)
                 {
                     var fileName = Path.GetFileName(resourceModel.ImageFile.FileName);
+                    int i = 1;
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                    while (System.IO.File.Exists(filePath))
+                    {
+                        i++;
+                        fileName = $"{fileName}({i})";
+                        filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                    }
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await resourceModel.ImageFile.CopyToAsync(stream);
@@ -81,7 +106,7 @@ namespace PracticeProject.Controllers
             return View(resourceModel);
         }
 
-        // GET: ResourceModels/Edit/5
+        // GET: ResourceModels/Edit/5  
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Resources == null)
@@ -116,7 +141,14 @@ namespace PracticeProject.Controllers
                     if (resourceModel.ImageFile != null)
                     {
                         var fileName = Path.GetFileName(resourceModel.ImageFile.FileName);
+                        int i = 1;
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            i++;
+                            fileName = $"{fileName}({i})";
+                            filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        }
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             await resourceModel.ImageFile.CopyToAsync(stream);

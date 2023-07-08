@@ -1,34 +1,73 @@
-$(window).scroll(function () {
 
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        var page = parseInt($('#page').val()) + 1;
-        var urlParams = new URLSearchParams(window.location.search);
-        var id = urlParams.get('Id');
-        $.ajax({
-            url: '/Resources/LoadMoreComments',
-            type: 'POST',
-            data: {
-                resourceId: id,
-                page: page
-            },
-            dataType: 'json',
-            success: function (data) {
-                for (const x of data) {
-                    $("#comments").append(`
-                <div class="comment">
-                    <span>${x.nickname}</span>
-                    <span>${x.commentText}</span>
-                </div
-                `);
-                }
-                $('#page').val(parseInt(page) + 1);
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-            }
-        });
+var connection = new signalR.HubConnectionBuilder().withUrl("/commentHub").build();
+
+connection.on("NewComment", function (comment) {
+    debugger;
+    var id = $('#resourceId').val();
+    if (isLastPage && comment.resourceId == id) {
+        $("#comments").append(`
+        <div class="comment">
+            <div><h3>${comment.nickname}</h3></div>
+            <div><span>${comment.text}</span></div>
+            <div><span>${comment.createdAt}</span></div>
+        </div>
+        `);
     }
 });
+
+connection.start().then(function () {
+    console.log("SignalR connection established.");
+}).catch(function (err) {
+    console.error(err.toString());
+});
+var isLastPage = false;
+var isLoading = false;
+var page = 1;
+
+$(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        if (!isLoading) {
+            isLoading = true;
+            loadMoreComments(page);
+        }
+    }
+});
+
+function loadMoreComments() {
+    if (isLastPage) return;
+    var urlParams = new URLSearchParams(window.location.search);
+    var id = urlParams.get('Id');
+    $.ajax({
+        url: '/Resources/LoadMoreComments',
+        type: 'POST',
+        data: {
+            resourceId: id,
+            page: page
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.length > 0) {
+                for (const x of data) {
+                    $("#comments").append(`
+                        <div class="comment">
+                            <div><h3>${x.nickname}</h3></div>
+                            <div><span>${x.commentText}</span></div>
+                            <div><span>${x.createdAt}</span></div>
+                        </div>
+                    `);
+                }
+                debugger;
+                isLoading = false;
+                page++;
+            }
+            else { isLastPage = true; }
+        },
+        error: function (xhr) {
+            console.log(xhr.responseText);
+            isLoading = false;
+        }
+    });
+}
 $("#comment-button").click(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var id = urlParams.get('Id');
@@ -44,14 +83,7 @@ $("#comment-button").click(function () {
         },
         dataType: 'json',
         success: function (data) {
-            if (data.needsToBeAdded) {
-                $("#comments").append(`
-                <div class="comment">
-                    <span>${data.nickname}</span>
-                    <span>${text}</span>
-                </div
-                `);
-            }
+           
         },
         error: function (xhr) {
             console.log(xhr.responseText);
