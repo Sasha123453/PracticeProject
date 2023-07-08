@@ -2,16 +2,17 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/commentHub").build();
 
 connection.on("NewComment", function (comment) {
+    var urlParams = new URLSearchParams(window.location.search);
+    var id = urlParams.get('Id');
     debugger;
-    var id = $('#resourceId').val();
     if (isLastPage && comment.resourceId == id) {
         $("#comments").append(`
         <div class="comment">
             <div class="comment-head">
-                <h3>${x.nickname}</h3>
-                <span>${x.createdAt}</span >
+                <h3>${comment.nickname}</h3>
+                <span>${comment.createdAt}</span >
             </div>
-            <div><span>${x.text}</span ></div >
+            <div><span>${comment.commentText}</span ></div >
         </div>
         `);
     }
@@ -33,6 +34,11 @@ $(window).scroll(function () {
             loadMoreComments(page);
         }
     }
+});
+$(document).ready(function () {
+    debugger;
+    var comments = $('#comments');
+    if (comments.length < 8) isLastPage = true;
 });
 
 function loadMoreComments() {
@@ -76,14 +82,12 @@ $("#comment-button").click(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var id = urlParams.get('Id');
     var text = $('#comment-text').val();
-    var page = $('#page').val();
     $.ajax({
         url: '/Resources/SendComment',
         type: 'GET',
         data: {
             text: text,
             id: id,
-            page: page
         },
         dataType: 'json',
         success: function (data) {

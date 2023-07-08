@@ -1,24 +1,29 @@
-﻿@model ResourceViewModel<ResourceRequestModel>
-
+﻿@model ResourceViewModel<ResourceRequestWithNicknameModel>
+<link href="~/css/ShowRequestsPage.css" rel="stylesheet">
 <div>
     @foreach (var x in Model.Resources)
     {
         var className = "request-block";
         if (User.IsInRole("Admin")) className += " admin";
         else className += " user";
-        className += x.IsCompleted ? " completed" :
-        x.IsRejected ? " rejected" :
-        x.IsBeingWatched ? " watched" : " nothing";
+        className += x.Request.IsCompleted ? " completed" :
+        x.Request.IsRejected ? " rejected" :
+        x.Request.IsBeingWatched ? " watched" : " nothing";
         <form asp-controller="ResourceModels" asp-action="CreateRequestedResource" class="@className">
-            <input type="hidden" id="id" value="@x.Id" name="id">
-            <p>@x.Name</p>
-            <p>@x.Link</p>
-            <p>@x.Description</p>
-            <input type="submit">
+            <input type="hidden" id="id" value="@x.Request.Id" name="id">
+            <p>@x.Request.Name</p>
+            <p>@x.Request.Link</p>
+            <p>@x.Request.Description</p>
+            <p>@x.Nickname</p>
+            <p>@x.CreatedAt</p>
+            <input type="submit" class="submit-button">
             <button class="cancel-button" id="cancel-button">Отклонить заявку</button>
             <button class="check-button" id="check-button">Заявка на рассмотрении</button>
         </form>
     }
+</div>
+<div>
+    <a asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
 </div>
 <div class="container">
     @if (Model.TotalPages > 1)

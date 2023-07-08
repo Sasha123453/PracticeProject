@@ -2,23 +2,25 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<GoogleCaptchaConfig> GoogleCaptchaConfig
 <script src="https://www.google.com/recaptcha/api.js?render=@GoogleCaptchaConfig.Value.SiteKey"></script>
-<link href="~/css/ResourceById.css" rel="stylesheet">
+<link href="~/css/ResoureRequest.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/ResourceRequest.js"></script>
-<input type="hidden" id="token" />
-<div>
-    <input type="text" id="name" placeholder="">
-    <label for="name">Название сервиса</label>
-</div>
-<div>
-    <input type="text" id="link" placeholder="">
-    <label for="link">Ссылка на сервис</label>
-</div>
-<div>
-    <input type="text" id="description" placeholder="">
-    <label for="description">Краткое описание сервиса</label>
-</div>
-<button id="send-button">Отправить</button>
+<section>
+    <input type="hidden" id="token" />
+    <div>
+        <input type="text" id="name" placeholder="">
+        <label for="name">Название сервиса</label>
+    </div>
+    <div>
+        <input type="text" id="link" placeholder="">
+        <label for="link">Ссылка на сервис</label>
+    </div>
+    <div>
+        <input type="text" id="description" placeholder="">
+        <label for="description">Краткое описание сервиса</label>
+    </div>
+    <button id="send-button">Отправить</button>
+</section>
 <script>
     function getToken(){
         $(function () {

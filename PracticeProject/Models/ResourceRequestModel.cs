@@ -11,6 +11,7 @@ namespace PracticeProject.Models
         public bool IsCompleted { get; set; }
         public bool IsRejected { get; set; }
         public bool IsBeingWatched { get; set; }
+        public DateTime CreatedAt { get; set; }
         public virtual User User { get; set; }
         public string UserId { get; set; }
         public ResourceRequestModel(string name, string description, string link, string userId) 
@@ -22,6 +23,7 @@ namespace PracticeProject.Models
             IsCompleted = false;
             IsRejected = false;
             IsBeingWatched = false;
+            CreatedAt = DateTime.Now;
         }
     }
 }

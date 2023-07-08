@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid container">
-                <div><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo-flague" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Wapen_Ossetien.svg/2048px-Wapen_Ossetien.svg.png" /></a></div>
+                <div><a class="navbar-brand" asp-area="" asp-controller="Resources" asp-action="ShowResourcesPage"><img class="logo-flague" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Wapen_Ossetien.svg/2048px-Wapen_Ossetien.svg.png" /></a></div>
                 <div><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Resources", "ShowResourcesPage", new { area = "" })">
                                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
                                 </form>
                             </li>

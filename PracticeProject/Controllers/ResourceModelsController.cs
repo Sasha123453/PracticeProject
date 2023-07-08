@@ -82,33 +82,52 @@ namespace PracticeProject.Controllers
             resourceModel.UserId = userId;
             if (ModelState.IsValid)
             {
-                if (resourceModel.ImageFile != null)
+                try
                 {
-                    var fileName = Path.GetFileName(resourceModel.ImageFile.FileName);
-                    int i = 1;
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
-                    while (System.IO.File.Exists(filePath))
+                    if (resourceModel.ImageFile != null)
                     {
-                        fileName = $"{fileName}({i})";
-                        i++;
-                        filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
-                    }
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await resourceModel.ImageFile.CopyToAsync(stream);
+                        var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
+                        string fileName = fileNameOrig;
+                        int i = 1;
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            string fileNameEx = Path.GetFileNameWithoutExtension(fileNameOrig);
+                            string ex = Path.GetExtension(fileNameOrig);
+                            fileName = $"{fileNameEx}({i}){ex}";
+                            i++;
+                            filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                        }
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await resourceModel.ImageFile.CopyToAsync(stream);
+                        }
+
+                        resourceModel.ImageName = "/images/" + fileName;
+                        if (resourceModel.RequestId != null)
+                        {
+                            ResourceRequestModel request = await _context.ResourceRequests.FindAsync(resourceModel.RequestId);
+                            request.IsCompleted = true;
+                            resourceModel.RequestId = request.Id;
+                            _context.Update(request);
+                        }
+
+                        _context.Add(resourceModel);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
                     }
 
-                    resourceModel.ImageName = "/images/" + fileName;
-                    if (resourceModel.RequestId != null)
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ResourceModelExists(resourceModel.Id))
                     {
-                        ResourceRequestModel request = await _context.ResourceRequests.FindAsync(resourceModel.RequestId);
-                        request.IsCompleted = true;
-                        _context.Update(request);
+                        return NotFound();
                     }
-
-                    _context.Add(resourceModel);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
             return View(resourceModel);
@@ -148,12 +167,15 @@ namespace PracticeProject.Controllers
                 {
                     if (resourceModel.ImageFile != null)
                     {
-                        var fileName = Path.GetFileName(resourceModel.ImageFile.FileName);
+                        var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
+                        string fileName = fileNameOrig;
                         int i = 1;
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                         while (System.IO.File.Exists(filePath))
                         {
-                            fileName = $"{fileName}({i})";
+                            string fileNameEx = Path.GetFileNameWithoutExtension(fileNameOrig);
+                            string ex = Path.GetExtension(fileNameOrig);
+                            fileName = $"{fileNameEx}({i}){ex}";
                             i++;
                             filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
                         }
@@ -165,6 +187,8 @@ namespace PracticeProject.Controllers
                         resourceModel.ImageName = "/images/" + fileName;
                     }
                     _context.Update(resourceModel);
+                    _context.Entry(resourceModel).Property(x => x.UserId).IsModified = false;
+                    _context.Entry(resourceModel).Property(x => x.CreatedAt).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
