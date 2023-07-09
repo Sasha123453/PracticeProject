@@ -21,10 +21,7 @@ $(document).on("click", "#reset-filters", function () {
 function applyFilter(filter) {
     debugger;
     var baseUrl = window.location.href.split('?')[0];
-    var params = new URLSearchParams(window.location.search);
-    params.set(filter, "true");
-    params.set("page", "1");
-    var url = baseUrl + "?" + params.toString();
+    var url = baseUrl + "?" + "page=1" + filter + "=true";
     window.location.href = url;
 }
 function resetFilters() {
