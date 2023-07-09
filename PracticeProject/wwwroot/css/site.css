@@ -58,7 +58,6 @@ body {
 
 .resource-card {
     width: 45%;
- 
     padding: 20px;
 }
 
@@ -66,6 +65,15 @@ body {
 {
     margin-bottom: 30px;
 
+}
+
+a {
+    color: #693423;
+}
+
+a:hover 
+{
+    color: black;
 }
 
 h2
@@ -77,9 +85,9 @@ p {
     font-size: 18px;
 }
 
-.resource-pic 
-{
-    max-width: 100%;
+.resource-pic {
+    max-width: 120%;
+    
 }
 
 *:focus {
@@ -130,3 +138,4 @@ footer div{
 {
     background-color: black;
 }
+

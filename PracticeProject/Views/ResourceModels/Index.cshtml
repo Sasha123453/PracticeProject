@@ -3,38 +3,36 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/Index.css" rel="stylesheet">
 
-<h1>Index</h1>
+
+<h1>Админ-панель</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить ресурс</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Название
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ShortDescription)
+                Краткое описание
+            </th>
+           
+            <th>
+                Ссылка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LongDescription)
+                Изображение
+            </th>
+           
+            <th>
+                Дата обновления
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Link)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
+                Дата создания
             </th>
             <th></th>
         </tr>
@@ -48,18 +46,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ShortDescription)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongDescription)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Link)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ImageName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
@@ -67,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }
