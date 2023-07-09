@@ -1,6 +1,8 @@
 ﻿@model ResourceViewModel<ResourceRequestWithNicknameModel>
 <link href="~/css/ShowRequestsPage.css" rel="stylesheet">
-<div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ShowRequestsPage.js"></script>
+<section>
     @foreach (var x in Model.Resources)
     {
         var className = "request-block";
@@ -9,7 +11,7 @@
         className += x.Request.IsCompleted ? " completed" :
         x.Request.IsRejected ? " rejected" :
         x.Request.IsBeingWatched ? " watched" : " nothing";
-        <form asp-controller="ResourceModels" asp-action="CreateRequestedResource" class="@className">
+        <form asp-controller="ResourceModels" asp-action="CreateRequestedResource" class="@className">hk
             <input type="hidden" id="id" value="@x.Request.Id" name="id">
             <p>@x.Request.Name</p>
             <p>@x.Request.Link</p>
@@ -21,7 +23,12 @@
             <button class="check-button" id="check-button">Заявка на рассмотрении</button>
         </form>
     }
-</div>
+    <button id="watched-filter">Watched</button>
+    <button id="completed-filter">Completed</button>
+    <button id="rejected-filter">Rejected</button>
+    <button id="nothing-filter">Nothing</button>
+    <button id="reset-filters">Сбросить</button>
+</section>
 <div>
     <a asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
 </div>
