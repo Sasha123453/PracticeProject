@@ -46,7 +46,7 @@ $(document).on("click", "#reject-button", function () {
         method: method,
         data: data,
         success: function (response) {
-            form.classList.add('rejected');
+            form.addClass('rejected');
         },
         error: function (xhr) {
             // Обработка ошибки
@@ -65,7 +65,7 @@ $(document).on("click", "#check-button", function () {
         method: method,
         data: data,
         success: function (response) {
-            form.classList.add('watched');
+            form.addClass('watched');
         },
         error: function (xhr) {
             // Обработка ошибки
