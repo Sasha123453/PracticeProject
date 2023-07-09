@@ -52,12 +52,13 @@ body {
     flex-wrap: wrap;
     margin-bottom: 40px;
     word-wrap: break-word;
+    justify-content: space-between;
     gap: 50px;
 }
 
 .resource-card {
     width: 45%;
-    margin: 0 auto;
+ 
     padding: 20px;
 }
 
