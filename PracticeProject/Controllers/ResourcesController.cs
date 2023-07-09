@@ -159,7 +159,7 @@ namespace PracticeProject.Controllers
             try
             {
                 ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
-                if (request.IsBeingWatched || request.IsCompleted || request.IsRejected) return StatusCode(409);
+                if (request.IsCompleted || request.IsRejected) return StatusCode(409);
                 request.IsRejected = true;
                 _context.Update(request);
                 await _context.SaveChangesAsync();
