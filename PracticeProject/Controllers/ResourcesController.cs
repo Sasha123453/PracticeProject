@@ -8,6 +8,7 @@ using PracticeProject.Models;
 using System.Drawing.Printing;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace PracticeProject.Controllers
 {
@@ -18,7 +19,8 @@ namespace PracticeProject.Controllers
         private readonly GoogleCaptchaService _googleCaptchaService;
         private readonly IHubContext<CommentHub> _commentHubContext;
         const int pageSizeComments = 8;
-        const int pageSizeResources = 10; 
+        const int pageSizeResources = 10;
+        const int pageSizeRequests = 4;
         public ResourcesController(UserManager<User> userManager, ApplicationContext context, GoogleCaptchaService googleCaptchaService, IHubContext<CommentHub> commenthubContext)
         {
             _context = context;
@@ -79,7 +81,7 @@ namespace PracticeProject.Controllers
             };
             return View(viewModel);
         }
-        public async Task<List<ResourceRequestWithNicknameModel>> GetRequestsFromDataSource(int page)
+        public async Task<ResourceRequestsWithTotalPagesModel> GetRequestsFromDataSource(int page, bool watched = false, bool completed = false, bool rejected = false, bool nothing = false)
         {
             var result = from request in _context.ResourceRequests
                         join user in _context.Users
@@ -96,22 +98,40 @@ namespace PracticeProject.Controllers
                 string userId = _userManager.GetUserId(User);
                 result = result.Where(request => request.Request.UserId == userId);
             }
+            if (watched)
+                result = result.Where(x => x.Request.IsBeingWatched);
+            if (completed)
+                result = result.Where(x => x.Request.IsCompleted);
+            if (rejected)
+                result = result.Where(x => x.Request.IsRejected);
+            if (nothing)
+                result = result.Where(x => !x.Request.IsBeingWatched && !x.Request.IsCompleted && !x.Request.IsRejected);
+            
+            double amount = await result.CountAsync();
+            int totalPages = (int)Math.Ceiling(amount / pageSizeRequests);
+            if (totalPages < 1) totalPages = 1;
+            result = result.Skip((page - 1) * pageSizeRequests).Take(pageSizeRequests);
 
-            return await result.Skip((page - 1) * pageSizeComments)
-                              .Take(pageSizeComments)
-                              .ToListAsync();
+            ResourceRequestsWithTotalPagesModel newResult = new ResourceRequestsWithTotalPagesModel()
+            {
+                Requests = result,
+                TotalPages = totalPages
+            };
+            return newResult;
         }
         public async Task<IActionResult> ShowRequestsPage(int page = 1)
         {
-            List<ResourceRequestWithNicknameModel> requests = await GetRequestsFromDataSource(page);
-            double requestsAmount = await GetRequestsAmountFromDataSource();
-            int totalPages = (int)Math.Ceiling(requestsAmount / pageSizeResources);
-
+            bool watched = Request.Query.ContainsKey("watched");
+            bool completed = Request.Query.ContainsKey("completed");
+            bool rejected = Request.Query.ContainsKey("rejected");
+            bool nothing = Request.Query.ContainsKey("nothing");
+            ResourceRequestsWithTotalPagesModel requestsWithTotalPages = await GetRequestsFromDataSource(page, watched, completed, rejected, nothing);
+            var requests = requestsWithTotalPages.Requests;
             var viewModel = new ResourceViewModel<ResourceRequestWithNicknameModel>
             {
                 Resources = requests,
                 CurrentPage = page,
-                TotalPages = totalPages
+                TotalPages = requestsWithTotalPages.TotalPages
             };
 
             return View(viewModel);

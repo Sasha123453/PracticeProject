@@ -240,6 +240,8 @@ namespace PracticeProject.Controllers
             var resourceModel = await _context.Resources.FindAsync(id);
             if (resourceModel != null)
             {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), resourceModel.ImageName);
+                Directory.Delete(filePath);
                 _context.Resources.Remove(resourceModel);
             }
             

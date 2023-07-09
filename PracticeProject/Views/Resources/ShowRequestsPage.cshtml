@@ -1,6 +1,15 @@
 ﻿@model ResourceViewModel<ResourceRequestWithNicknameModel>
 <link href="~/css/ShowRequestsPage.css" rel="stylesheet">
-<div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ShowRequestsPage.js"></script>
+<section>
+    <div class="filters">
+        <button id="watched-filter">Watched</button>
+        <button id="completed-filter">Completed</button>
+        <button id="rejected-filter">Rejected</button>
+        <button id="nothing-filter">Nothing</button>
+        <button id="reset-filters">Сбросить</button>
+    </div>
     @foreach (var x in Model.Resources)
     {
         var className = "request-block";
@@ -21,7 +30,7 @@
             <button class="check-button" id="check-button">Заявка на рассмотрении</button>
         </form>
     }
-</div>
+</section>
 <div>
     <a asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
 </div>
