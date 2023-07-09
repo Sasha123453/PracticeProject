@@ -55,6 +55,7 @@ namespace PracticeProject.Controllers
         {
             ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
             if (request.IsCompleted || request.IsRejected) { return RedirectToAction("ShowRequestsPage", "Resources"); }
+            request.IsBeingWatched = false;
             ResourceModel resource = new ResourceModel()
             {
                 Name = request.Name,
