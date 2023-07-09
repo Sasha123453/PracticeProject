@@ -241,7 +241,7 @@ namespace PracticeProject.Controllers
             if (resourceModel != null)
             {
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), resourceModel.ImageName);
-                Directory.Delete(filePath);
+                if (Directory.Exists(filePath)) { Directory.Delete(filePath); }
                 _context.Resources.Remove(resourceModel);
             }
             
