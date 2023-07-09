@@ -54,6 +54,7 @@ namespace PracticeProject.Controllers
         public async Task<IActionResult> CreateRequestedResource(int id)
         {
             ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+            if (request.IsCompleted || request.IsRejected) { return RedirectToAction("ShowRequestsPage", "Resources"); }
             ResourceModel resource = new ResourceModel()
             {
                 Name = request.Name,
