@@ -42,8 +42,8 @@ button:hover
 section {
     overflow: hidden;
 }
-.completed .reject-button, .completed .check-button, .rejected .check-button,
-.reject .submit-button, .rejected .reject-button, .watched .check-button {
+.completed .reject-button, .completed .check-button, .completed .submit-button, .rejected .check-button,
+.rejected .submit-button, .rejected .reject-button, .watched .check-button {
     pointer-events: none;
     opacity: .65;
 }
