@@ -9,6 +9,7 @@ using System.Drawing.Printing;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Owin.Security.Provider;
 
 namespace PracticeProject.Controllers
 {
@@ -135,6 +136,40 @@ namespace PracticeProject.Controllers
             };
 
             return View(viewModel);
+        }
+        public async Task<IActionResult> MakeRequestWatched(int id)
+        {
+            try
+            {
+                ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+                if (request.IsBeingWatched || request.IsCompleted || request.IsRejected) return StatusCode(409);
+                request.IsBeingWatched = true;
+                _context.Update(request);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "An error occurred while processing the chat request. Details1: " + ex.Message;
+                return Json(new { success = false, error = errorMessage });
+            }
+        }
+        public async Task<IActionResult> CancelRequest(int id)
+        {
+            try
+            {
+                ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+                if (request.IsBeingWatched || request.IsCompleted || request.IsRejected) return StatusCode(409);
+                request.IsRejected = true;
+                _context.Update(request);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "An error occurred while processing the chat request. Details1: " + ex.Message;
+                return Json(new { success = false, error = errorMessage });
+            }
         }
         public async Task<List<ResourceModel>> GetResourcesFromDataSource(int page)
         {
