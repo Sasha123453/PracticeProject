@@ -4,12 +4,11 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Редактирование</h1>
 
-<h4>ResourceModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="edit-form-box container">
+    <h2 >Редактирование</h2>
+    <div>
         <form asp-action="Edit" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -50,14 +49,14 @@
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад к списку</a>
 </div>
 
 @section Scripts {
