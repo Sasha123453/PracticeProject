@@ -60,6 +60,7 @@ namespace PracticeProject.Controllers
         }
         public async Task<IActionResult> ShowResourcesPage(int page = 1)
         {
+            
             List<ResourceModel> resources = await GetResourcesFromDataSource(page);
             double resourcesAmount = await GetResourcesAmountFromDataSource();
             int totalPages = (int)Math.Ceiling(resourcesAmount / pageSizeResources);
