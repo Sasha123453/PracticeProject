@@ -87,7 +87,7 @@ namespace PracticeProject.Controllers
         }
         public async Task<ResourceRequestsWithTotalPagesModel> GetRequestsFromDataSource(int page, bool watched = false, bool completed = false, bool rejected = false, bool nothing = false)
         {
-            var result = from request in _context.ResourceRequests
+            var result = (from request in _context.ResourceRequests
                         join user in _context.Users
                         on request.UserId equals user.Id
                         select new ResourceRequestWithNicknameModel
@@ -95,7 +95,7 @@ namespace PracticeProject.Controllers
                             Request = request,
                             Nickname = user.Nickname,
                             CreatedAt = request.CreatedAt
-                        };
+                        }).AsNoTracking();
 
             if (!User.IsInRole("Admin"))
             {
@@ -145,7 +145,7 @@ namespace PracticeProject.Controllers
         {
             try
             {
-                ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+                ResourceRequestModel request = await _context.ResourceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (request.IsBeingWatched || request.IsCompleted || request.IsRejected) return StatusCode(409);
                 request.IsBeingWatched = true;
                 _context.Update(request);
@@ -163,7 +163,7 @@ namespace PracticeProject.Controllers
         {
             try
             {
-                ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+                ResourceRequestModel request = await _context.ResourceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (request.IsCompleted || request.IsRejected) return StatusCode(409);
                 request.IsRejected = true;
                 request.IsBeingWatched = false;
@@ -201,6 +201,7 @@ namespace PracticeProject.Controllers
                                     Nickname = user.Nickname,
                                     CreatedAt = DateOnly.FromDateTime(comment.CreatedAt)
                                 })
+                                .AsNoTracking()
                                 .Skip((page - 1) * pageSizeComments)
                                 .Take(pageSizeComments)
                                 .ToListAsync();
