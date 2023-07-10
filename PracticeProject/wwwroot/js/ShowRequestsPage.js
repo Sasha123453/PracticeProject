@@ -14,7 +14,7 @@ $(document).ready(function () {
     debugger;
     var params = new URLSearchParams(window.location.search);
     var name = '#' + getFilterName(params) + '-filter';
-    $(name).addClass('active');
+    $(name).addClass('active-filter');
     debugger;
 })
 function getFilterName(queryString) {

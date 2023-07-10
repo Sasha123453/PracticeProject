@@ -67,3 +67,11 @@ section {
     pointer-events: none;
     opacity: .65;
 }
+
+.active-filter {
+    opacity: .9;
+    box-shadow: 1px 1px 2px black;
+    color: black;
+}
+
+
