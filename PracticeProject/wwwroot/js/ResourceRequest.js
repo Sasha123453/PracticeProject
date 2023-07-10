@@ -16,6 +16,9 @@ $(document).on("click", "#send-button", function () {
         },
         dataType: 'json',
         success: function (data) {
+            debugger;
+            $('#send-form').addClass('hidden');
+            $('#on-success').removeClass('hidden');
         },
         error: function (xhr) {
             console.log(xhr.responseText);

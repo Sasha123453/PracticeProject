@@ -44,3 +44,9 @@ section {
     pointer-events: none;
     opacity: .65;
 }
+.requests{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

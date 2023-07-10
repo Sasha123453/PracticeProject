@@ -2,14 +2,14 @@
 <link href="~/css/ShowRequestsPage.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/ShowRequestsPage.js"></script>
-<section>
-    <div class="filters">
-        <button id="watched-filter">Watched</button>
-        <button id="completed-filter">Completed</button>
-        <button id="rejected-filter">Rejected</button>
-        <button id="nothing-filter">Nothing</button>
-        <button id="reset-filters">Сбросить</button>
-    </div>
+<div class="filters">
+    <button id="watched-filter">На рассмотрении</button>
+    <button id="completed-filter">Выполненные</button>
+    <button id="rejected-filter">Отклонённые</button>
+    <button id="nothing-filter">Не рассмотренные</button>
+    <button id="reset-filters">Сбросить</button>
+</div>
+<section class="requests">
     @foreach (var x in Model.Resources)
     {
         var className = "request-block";
