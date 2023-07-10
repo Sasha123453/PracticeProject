@@ -19,6 +19,7 @@ $(document).on("click", "#send-button", function () {
             debugger;
             $('#send-form').addClass('hidden');
             $('#on-success').removeClass('hidden');
+            $('#request-text').addClass('hidden');
         },
         error: function (xhr) {
             console.log(xhr.responseText);
