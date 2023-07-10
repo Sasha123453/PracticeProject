@@ -10,13 +10,23 @@ connection.on("NewComment", function (comment) {
         <div class="comment">
             <div class="comment-head">
                 <h3>${comment.nickname}</h3>
-                <span>${comment.createdAt}</span>
+                <span>${parseDate(comment.createdAt)}</span>
             </div>
             <div><span>${comment.commentText}</span></div>
         </div>
         `);
     }
 });
+function parseDate(date) {
+    debugger;
+    var myDate = new Date(date);
+    const result = myDate.toLocaleString("en-GB", { // you can use undefined as first argument
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    })
+    return result.split('/').join('.');
+}
 
 connection.start().then(function () {
     console.log("SignalR connection established.");
@@ -61,7 +71,7 @@ function loadMoreComments() {
                      <div class="comment">
                         <div class="comment-head">
                             <h3>${x.nickname}</h3>
-                            <span>${x.createdAt}</span >
+                            <span>${parseDate(x.createdAt)}</span >
                         </div>
                         <div><span>${x.commentText}</span ></div >
                       </div>

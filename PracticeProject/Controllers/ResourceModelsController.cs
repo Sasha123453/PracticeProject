@@ -58,9 +58,11 @@ namespace PracticeProject.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRequestedResource(int id)
         {
-            ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
+            ResourceRequestModel request = await _context.ResourceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             if (request.IsCompleted || request.IsRejected) { return RedirectToAction("ShowRequestsPage", "Resources"); }
             request.IsBeingWatched = false;
+            _context.Update(request);
+            await _context.SaveChangesAsync();
             ResourceModel resource = new ResourceModel()
             {
                 Name = request.Name,
@@ -88,12 +90,12 @@ namespace PracticeProject.Controllers
             {
                 try
                 {
-                    resourceModel.CreatedAt = DateTime.Now;
-                    resourceModel.UpdatedAt = DateTime.Now;
-                    string userId = _userManager.GetUserId(User);
-                    resourceModel.UserId = userId;
                     if (resourceModel.ImageFile != null)
                     {
+                        resourceModel.CreatedAt = DateTime.Now;
+                        resourceModel.UpdatedAt = DateTime.Now;
+                        string userId = _userManager.GetUserId(User);
+                        resourceModel.UserId = userId;
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
                         string fileName = fileNameOrig;
                         int i = 1;
@@ -256,9 +258,13 @@ namespace PracticeProject.Controllers
             var resourceModel = await _context.Resources.FindAsync(id);
             if (resourceModel != null)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}");
-                if (Directory.Exists(filePath)) { Directory.Delete(filePath, true); }
-                _context.Resources.Remove(resourceModel);
+                try
+                {
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}");
+                    if (Directory.Exists(filePath)) { Directory.Delete(filePath, true); }
+                    _context.Resources.Remove(resourceModel);
+                }
+                catch (Exception ex) { }
             }
             
             await _context.SaveChangesAsync();
