@@ -2,12 +2,18 @@
 <link href="~/css/ShowRequestsPage.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/ShowRequestsPage.js"></script>
+<div class="container">
 <div class="filters">
-    <button id="watched-filter">На рассмотрении</button>
-    <button id="completed-filter">Выполненные</button>
-    <button id="rejected-filter">Отклонённые</button>
-    <button id="nothing-filter">Не рассмотренные</button>
-    <button id="reset-filters">Сбросить</button>
+    <div>
+            <button id="watched-filter">На рассмотрении</button>
+            <button id="completed-filter">Выполненные</button>
+            <button id="rejected-filter">Отклонённые</button>
+            <button id="nothing-filter">Не рассмотренные</button>
+            <button id="reset-filters">Сбросить</button>
+    </div>
+        <div>
+            <a class="create-request-box" asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
+        </div>
 </div>
 <section class="requests">
     @foreach (var x in Model.Resources)
@@ -32,9 +38,7 @@
         
     }
 </section>
-<div>
-    <a asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
-</div>
+
 <div class="container">
     @if (Model.TotalPages > 1)
     {
@@ -69,4 +73,5 @@
             </ul>
         </nav>
     }
+</div>
 </div>

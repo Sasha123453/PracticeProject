@@ -18,7 +18,17 @@
     margin-top: 30px;
     margin-bottom: 50px;
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+.create-request-box {
+    background-color: #693423;
+    text-decoration: none;
+    color: #f7f1d5;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold;
 }
 
 .request-block {
@@ -37,16 +47,18 @@
     }
 
 section {
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+   justify-content: center;
+}
+
+.request-block
+{
+    width: 45%;
 }
 .completed .reject-button, .completed .check-button, .completed .submit-button, .rejected .check-button,
 .rejected .submit-button, .rejected .reject-button, .watched .check-button {
     pointer-events: none;
     opacity: .65;
-}
-.requests{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }

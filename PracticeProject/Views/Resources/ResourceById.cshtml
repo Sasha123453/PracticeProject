@@ -12,13 +12,13 @@
             <h2>@Model.Resource.Name</h2>
             <img class="resource-pic" src="@Url.Content(path)" alt="Image" />
             <p>@Model.Resource.LongDescription</p>
-            <a href="@Model.Resource.Link">Перейти на ресурс</a>
+            <a class="resource-link" href="@Model.Resource.Link">Перейти на ресурс</a>
         </div>
     </section>
     <section class="second-sec">
         <div class="send-comments">
-            <input type="text" id="comment-text" class="comment-text">
-            <div><button class="comment-button" id="comment-button">Добавить комментарий</button></div>
+            <textarea id="comment-text" class="comment-text" ></textarea>
+            <div><button id="comment-button">Добавить комментарий</button></div>
         </div>
         <input type="hidden" id="resourceId" value="@Model.Resource.Id">
         <div class="comments" id="comments">

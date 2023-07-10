@@ -37,11 +37,28 @@ h3 {
     margin-bottom: 40px;
 
 }
-.send-comments > div > button  {
+    .send-comments > div > button {
         background-color: #693423;
         color: #f7f1d5;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 2px 3px 2px black;
+        box-shadow: 2px 1px 2px black;
         padding: 5px;
+        background-color: #693423;
+        border-radius: 0 0 15px 15px;
+        
+    }
+
+.resource-link {
+    background-color: #693423;
+    text-decoration: none;
+    color: #f7f1d5;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold; important!
+}
+
+.comment-text {
+    border-radius: 15px 15px 0 0;
+    padding: 7px;
+    resize: none;
+    width: 30%;
 }

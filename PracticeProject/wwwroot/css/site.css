@@ -98,21 +98,25 @@ p {
 .pagination a {
     background-color: #693423;
     color: #f7f1d5;
+    border-radius: 10px;
 }
 
 .pagination li {
     margin: 0 auto;
+    border-radius: 10px;
 }
 
 .pagination a:hover {
     background-color: white;
     color: #693423;
+
 }
 
 .page-item.active .page-link {
     background-color: black;
     border-color: #693423;
     color: #f7f1d5;
+   
 }
 
 input[type=submit] {
