@@ -191,7 +191,7 @@ namespace PracticeProject.Controllers
         }
         public async Task<List<CommentWithNicknameModel>> GetResourceCommentsFromDataSource(int id, int page = 1)
         {
-            var result = await (from comment in _context.Comments
+            return await (from comment in _context.Comments
                                 join user in _context.Users
                                 on comment.UserId equals user.Id
                                 where comment.ResourceId == id
@@ -205,12 +205,10 @@ namespace PracticeProject.Controllers
                                 .Skip((page - 1) * pageSizeComments)
                                 .Take(pageSizeComments)
                                 .ToListAsync();
-            return result;
         }
         public async Task<int> GetResourceCommentsAmountFromDataSource(int id)
         {
-            var result = await _context.Comments.Where(x => x.ResourceId == id).CountAsync();
-            return result;
+            return await _context.Comments.Where(x => x.ResourceId == id).CountAsync();
         }
         [HttpPost]
         public async Task<IActionResult> LoadMoreComments(int resourceId, int page)
