@@ -94,7 +94,7 @@ namespace PracticeProject.Controllers
                         {
                             Request = request,
                             Nickname = user.Nickname,
-                            CreatedAt = request.CreatedAt
+                            CreatedAt = DateOnly.FromDateTime(request.CreatedAt)
                         }).AsNoTracking();
 
             if (!User.IsInRole("Admin"))

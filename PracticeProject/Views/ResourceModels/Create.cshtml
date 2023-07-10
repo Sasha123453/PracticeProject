@@ -25,38 +25,39 @@
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Название ресурса</label>
                 <input asp-for="Name" class="form-control" value="@name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ShortDescription" class="control-label"></label>
+                <label asp-for="ShortDescription" class="control-label">Короткое описание</label>
                 <input asp-for="ShortDescription" class="form-control" value="@desc"/>
                 <span asp-validation-for="ShortDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FolderName" class="control-label"></label>
+                <label asp-for="FolderName" class="control-label">Название папки</label>
                 <input asp-for="FolderName" class="form-control"/>
                 <span asp-validation-for="FolderName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LongDescription" class="control-label"></label>
+                <label asp-for="LongDescription" class="control-label">Полное описание</label>
                 <input asp-for="LongDescription" class="form-control" />
                 <span asp-validation-for="LongDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Link" class="control-label"></label>
+                <label asp-for="Link" class="control-label">Ссылка</label>
                 <input asp-for="Link" class="form-control" value="@link"/>
                 <span asp-validation-for="Link" class="text-danger"></span>
             </div>
             <input asp-for="RequestId" type="hidden" value="@id"/>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
+                <label asp-for="Type" class="control-label">Тип ресурса</label>
                 <input asp-for="Type" class="form-control" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
+            <input asp-for="ImageName" type="hidden" value="1"/>
             <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
+                <label asp-for="ImageFile" class="control-label">Картинка</label>
                 <input asp-for="ImageFile" type="file" class="form-control">
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>

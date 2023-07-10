@@ -84,14 +84,14 @@ namespace PracticeProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ResourceModel resourceModel)
         {
-            resourceModel.CreatedAt = DateTime.Now;
-            resourceModel.UpdatedAt = DateTime.Now;
-            string userId = _userManager.GetUserId(User);
-            resourceModel.UserId = userId;
             if (ModelState.IsValid)
             {
                 try
                 {
+                    resourceModel.CreatedAt = DateTime.Now;
+                    resourceModel.UpdatedAt = DateTime.Now;
+                    string userId = _userManager.GetUserId(User);
+                    resourceModel.UserId = userId;
                     if (resourceModel.ImageFile != null)
                     {
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
@@ -172,13 +172,14 @@ namespace PracticeProject.Controllers
             {
                 return NotFound();
             }
-            resourceModel.UpdatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var name = await _context.Resources.AsNoTracking().Where(x => x.Id == id).Select(x => new { x.FolderName }).FirstOrDefaultAsync();
+                    resourceModel.UpdatedAt = DateTime.Now;
+                    var name = await _context.Resources.AsNoTracking().Where(x => x.Id == id).Select(x => new { x.FolderName, x.ImageName }).FirstOrDefaultAsync();
                     string folderName = name.FolderName;
+                    resourceModel.ImageName = name.ImageName;
                     if (resourceModel.ImageFile != null)
                     {
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);

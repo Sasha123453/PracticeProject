@@ -26,9 +26,12 @@
                                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
                                 </form>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ResourceModels" asp-action="Index">Админ-панель</a>
-                            </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="ResourceModels" asp-action="Index">Админ-панель</a>
+                                    </li>
+                                }
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Resources" asp-action="ShowRequestsPage">Заявки</a>
                                 </li>

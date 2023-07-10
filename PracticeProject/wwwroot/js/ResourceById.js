@@ -91,7 +91,7 @@ $("#comment-button").click(function () {
         },
         dataType: 'json',
         success: function (data) {
-           
+            $('#comment-text').val("");
         },
         error: function (xhr) {
             console.log(xhr.responseText);
