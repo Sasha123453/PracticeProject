@@ -71,11 +71,15 @@ a {
     color: #693423;
 }
 
-    a:hover {
-        opacity: .9;
-        box-shadow: 1px 1px 2px black;
-        color: #f7f1d5;
-    }
+a:hover 
+{
+    color: black;
+}
+.resource-link:hover {
+    opacity: .9;
+    box-shadow: 1px 1px 2px black;
+    color: #f7f1d5;
+}
 
 h2
 {
