@@ -93,6 +93,7 @@ namespace PracticeProject.Controllers
                         int i = 1;
                         var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}");
                         if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
+                        else return View(resourceModel);
                         var filePath = Path.Combine(path, fileName);
                         while (System.IO.File.Exists(filePath))
                         {
@@ -100,17 +101,17 @@ namespace PracticeProject.Controllers
                             string ex = Path.GetExtension(fileNameOrig);
                             fileName = $"{fileNameEx}({i}){ex}";
                             i++;
-                            filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}", fileName);
+                            filePath = Path.Combine(path, fileName);
                         }
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             await resourceModel.ImageFile.CopyToAsync(stream);
                         }
 
-                        resourceModel.ImageName = $"/images/{resourceModel.FolderName}/" + fileName;
+                        resourceModel.ImageName = fileName;
                         if (resourceModel.RequestId != null)
                         {
-                            ResourceRequestModel request = await _context.ResourceRequests.FindAsync(resourceModel.RequestId);
+                            var request = await _context.ResourceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == resourceModel.RequestId);
                             request.IsCompleted = true;
                             resourceModel.RequestId = request.Id;
                             _context.Update(request);
@@ -169,26 +170,29 @@ namespace PracticeProject.Controllers
             {
                 try
                 {
+                    var name = await _context.Resources.AsNoTracking().Where(x => x.Id == id).Select(x => new { x.FolderName }).FirstOrDefaultAsync();
+                    string folderName = name.FolderName;
                     if (resourceModel.ImageFile != null)
                     {
                         var fileNameOrig = Path.GetFileName(resourceModel.ImageFile.FileName);
                         string fileName = fileNameOrig;
                         int i = 1;
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}", fileName);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{folderName}");
+                        var filePath = Path.Combine(path, fileName);
                         while (System.IO.File.Exists(filePath))
                         {
                             string fileNameEx = Path.GetFileNameWithoutExtension(fileNameOrig);
                             string ex = Path.GetExtension(fileNameOrig);
                             fileName = $"{fileNameEx}({i}){ex}";
                             i++;
-                            filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", fileName);
+                            filePath = Path.Combine(path, fileName);
                         }
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             await resourceModel.ImageFile.CopyToAsync(stream);
                         }
 
-                        resourceModel.ImageName = "/images/" + fileName;
+                        resourceModel.ImageName = fileName;
                     }
                     _context.Update(resourceModel);
                     _context.Entry(resourceModel).Property(x => x.FolderName).IsModified = false;
@@ -242,8 +246,8 @@ namespace PracticeProject.Controllers
             var resourceModel = await _context.Resources.FindAsync(id);
             if (resourceModel != null)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), resourceModel.ImageName);
-                if (Directory.Exists(filePath)) { Directory.Delete(filePath); }
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{resourceModel.FolderName}");
+                if (Directory.Exists(filePath)) { Directory.Delete(filePath, true); }
                 _context.Resources.Remove(resourceModel);
             }
             

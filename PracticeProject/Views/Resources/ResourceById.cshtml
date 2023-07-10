@@ -1,4 +1,7 @@
 ﻿@model ResourceByIdViewModel<CommentWithNicknameModel>
+@{
+    string path = $"/images/{Model.Resource.FolderName}/{Model.Resource.ImageName}";
+}
 <link href="~/css/ResourceById.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
@@ -7,7 +10,7 @@
     <section class="first-section">
         <div>
             <h2>@Model.Resource.Name</h2>
-            <img class="resource-pic" src="@Url.Content(Model.Resource.ImageName)" alt="Image" />
+            <img class="resource-pic" src="@Url.Content(path)" alt="Image" />
             <p>@Model.Resource.LongDescription</p>
             <a href="@Model.Resource.Link">Перейти на ресурс</a>
         </div>

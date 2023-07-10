@@ -1,10 +1,11 @@
 ﻿@model ResourceViewModel<ResourceModel>
 
 @foreach (var x in Model.Resources){
+    var path = $"/images/{x.FolderName}/{x.ImageName}";
     <div class="resource-card">
         <input type="hidden" id="resourceId" value="@x.Id">
         <h2>@x.Name</h2>
-        <img class="resource-pic" src="@Url.Content(x.ImageName)" alt="Image" />
+        <img class="resource-pic" src="@Url.Content(path)" alt="Image" />
         <p>@x.ShortDescription</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
