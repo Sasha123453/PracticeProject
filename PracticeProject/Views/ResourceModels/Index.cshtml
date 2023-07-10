@@ -25,6 +25,9 @@
                 Ссылка
             </th>
             <th>
+                Название папки
+            </th>
+            <th>
                 Изображение
             </th>
            
@@ -50,8 +53,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Link)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FolderName)
+                </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageName)
+                <a href="/getimage/@item.FolderName/@item.ImageName">@Html.DisplayFor(modelItem => item.ImageName)</a>
             </td>
            
             <td>

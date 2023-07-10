@@ -17,17 +17,19 @@ namespace PracticeProject.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly GoogleCaptchaService _googleCaptchaService;
         private readonly IHubContext<CommentHub> _commentHubContext;
         const int pageSizeComments = 8;
         const int pageSizeResources = 10;
         const int pageSizeRequests = 4;
-        public ResourcesController(UserManager<User> userManager, ApplicationContext context, GoogleCaptchaService googleCaptchaService, IHubContext<CommentHub> commenthubContext)
+        public ResourcesController(UserManager<User> userManager, ApplicationContext context, GoogleCaptchaService googleCaptchaService, IHubContext<CommentHub> commenthubContext, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
             _googleCaptchaService = googleCaptchaService;
             _commentHubContext = commenthubContext;
+            _roleManager = roleManager;
         }
         [Authorize]
         public IActionResult ResourceRequest()
@@ -137,6 +139,7 @@ namespace PracticeProject.Controllers
 
             return View(viewModel);
         }
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> MakeRequestWatched(int id)
         {
             try
@@ -154,6 +157,7 @@ namespace PracticeProject.Controllers
                 return Json(new { success = false, error = errorMessage });
             }
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CancelRequest(int id)
         {
             try

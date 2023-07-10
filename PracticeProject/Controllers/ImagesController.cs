@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 
 namespace PracticeProject.Controllers
 {
-    [Route("getimage")]
+    [Route("/getimage/")]
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        [Route("getimage/{folderName}/{imageName}")]
+        [Route("/getimage/{folderName}/{imageName}")]
         public PhysicalFileResult GetImage(string folderName, string imageName)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{folderName}", imageName);

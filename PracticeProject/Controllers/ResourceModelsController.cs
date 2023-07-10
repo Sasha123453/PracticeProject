@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using PracticeProject.Areas.Identity.Data;
 using PracticeProject.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PracticeProject.Controllers
 {
@@ -24,6 +26,7 @@ namespace PracticeProject.Controllers
         }
 
         // GET: ResourceModels
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.Resources != null ? 
@@ -32,6 +35,7 @@ namespace PracticeProject.Controllers
         }
 
         // GET: ResourceModels/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Resources == null)
@@ -51,6 +55,7 @@ namespace PracticeProject.Controllers
 
         // GET: ResourceModels/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRequestedResource(int id)
         {
             ResourceRequestModel request = await _context.ResourceRequests.FindAsync(id);
@@ -75,6 +80,7 @@ namespace PracticeProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ResourceModel resourceModel)
         {
@@ -158,6 +164,7 @@ namespace PracticeProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ResourceModel resourceModel)
         {
@@ -217,6 +224,7 @@ namespace PracticeProject.Controllers
         }
 
         // GET: ResourceModels/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Resources == null)
@@ -235,6 +243,7 @@ namespace PracticeProject.Controllers
         }
 
         // POST: ResourceModels/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
