@@ -1,6 +1,33 @@
-﻿body {
-
-}
+﻿
 .hidden{
     display: none;
+}
+section {
+    width: 100%;
+    text-align: center;
+    
+}
+
+    section input {
+        width: 70%;
+        line-height: 30px;
+        border-radius: 15px;
+
+    }
+
+    section > div {
+       
+    }
+
+#send-button {
+    margin-top: 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #693423;
+    color: #f7f1d5;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 2px 3px 2px black;
+    padding: 5px;
 }

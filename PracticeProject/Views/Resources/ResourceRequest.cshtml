@@ -5,22 +5,30 @@
 <link href="~/css/ResourceRequest.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/ResourceRequest.js"></script>
-<section>
-    <div id="send-form">
+<section class="container edit-form-box">
+    <h2>Создать запрос</h2>
+    <div id="send-form" >
         <input type="hidden" id="token" />
         <div>
+            <div><label for="name"><h4>Название сервиса</h4></label></div>
             <input type="text" id="name" placeholder="">
-            <label for="name">Название сервиса</label>
+           
         </div>
         <div>
+            <div>
+                <label for="link"><h4>Ссылка на сервис</h4></label>
+            </div>
             <input type="text" id="link" placeholder="">
-            <label for="link">Ссылка на сервис</label>
+           
         </div>
         <div>
+                <div>
+                <label for="description"><h4>Краткое описание сервиса</h4></label>
+                </div>
             <input type="text" id="description" placeholder="">
-            <label for="description">Краткое описание сервиса</label>
+           
         </div>
-        <button id="send-button">Отправить</button>
+        <button id="send-button">отправить</button>
     </div>
     <div id="on-success" class="hidden">
         <p>Заявка успешно отправлена</p>
