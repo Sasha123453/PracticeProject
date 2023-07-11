@@ -5,11 +5,11 @@
 <div class="container">
 <div class="filters">
     <div>
-            <button id="watched-filter">На рассмотрении</button>
-            <button id="completed-filter">Выполненные</button>
-            <button id="rejected-filter">Отклонённые</button>
-            <button id="nothing-filter">Не рассмотренные</button>
-            <button id="reset-filters">Сбросить</button>
+         <button id="watched-filter">На рассмотрении</button>
+         <button id="nothing-filter">Не рассмотренные</button>
+         <button id="completed-filter">Выполненные</button>
+         <button id="rejected-filter">Отклонённые</button>
+         <button id="reset-filters">Сбросить</button>
     </div>
         <div>
             <a class="create-request-box" asp-controller="Resources" asp-action="ResourceRequest">Создать запрос</a>
@@ -43,12 +43,13 @@
     @if (Model.TotalPages > 1)
     {
         var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
+            var newqsPath = "";
             var parameters = System.Web.HttpUtility.ParseQueryString(qsPath);
             foreach (string key in parameters)
             {
                 if (parameters[key] == "true")
                 {
-                    qsPath =$"&{key}=true";
+                    newqsPath += $"&{key}=true";
                 }
             }
         <nav aria-label="Page navigation">
@@ -56,7 +57,7 @@
                 @if (Model.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = Model.CurrentPage - 1})@qsPath" aria-label="Previous">
+                        <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = Model.CurrentPage - 1})@newqsPath" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Предыдущая</span>
                         </a>
@@ -66,14 +67,14 @@
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                            <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = i})@qsPath">@i</a>
+                            <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = i})@newqsPath">@i</a>
                     </li>
                 }
 
                 @if (Model.CurrentPage < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = Model.CurrentPage + 1 })@qsPath" aria-label="Next">
+                        <a class="page-link" href="@Url.Action("ShowRequestsPage", new { page = Model.CurrentPage + 1 })@newqsPath" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Следующая</span>
                         </a>

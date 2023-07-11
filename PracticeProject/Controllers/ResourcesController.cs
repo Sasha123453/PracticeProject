@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using PracticeProject.Areas.Identity.Data;
 using PracticeProject.Models;
 using System.Drawing.Printing;
+using System.Linq.Dynamic.Core;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Owin.Security.Provider;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Internal;
+using LinqKit;
 
 namespace PracticeProject.Controllers
 {
@@ -87,30 +91,33 @@ namespace PracticeProject.Controllers
         }
         public async Task<ResourceRequestsWithTotalPagesModel> GetRequestsFromDataSource(int page, bool watched = false, bool completed = false, bool rejected = false, bool nothing = false)
         {
+            var predicate = PredicateBuilder.New<ResourceRequestWithNicknameModel>();
+            if (watched)
+                predicate = predicate.Or(x => x.Request.IsBeingWatched);
+            if (completed)
+                predicate = predicate.Or(x => x.Request.IsCompleted);
+            if (rejected)
+                predicate = predicate.Or(x => x.Request.IsRejected);
+            if (nothing)
+                predicate = predicate.Or(x => !x.Request.IsBeingWatched && !x.Request.IsCompleted && !x.Request.IsRejected);
             var result = (from request in _context.ResourceRequests
-                        join user in _context.Users
-                        on request.UserId equals user.Id
-                        select new ResourceRequestWithNicknameModel
-                        {
-                            Request = request,
-                            Nickname = user.Nickname,
-                            CreatedAt = DateOnly.FromDateTime(request.CreatedAt)
-                        }).AsNoTracking();
+                          join user in _context.Users
+                          on request.UserId equals user.Id
+                          select new ResourceRequestWithNicknameModel
+                          {
+                              Request = request,
+                              Nickname = user.Nickname,
+                              CreatedAt = DateOnly.FromDateTime(request.CreatedAt)
+                          })
+                        .AsNoTracking()
+                        .Where(predicate);
 
             if (!User.IsInRole("Admin"))
             {
                 string userId = _userManager.GetUserId(User);
                 result = result.Where(request => request.Request.UserId == userId);
             }
-            if (watched)
-                result = result.Where(x => x.Request.IsBeingWatched);
-            if (completed)
-                result = result.Where(x => x.Request.IsCompleted);
-            if (rejected)
-                result = result.Where(x => x.Request.IsRejected);
-            if (nothing)
-                result = result.Where(x => !x.Request.IsBeingWatched && !x.Request.IsCompleted && !x.Request.IsRejected);
-            
+
             double amount = await result.CountAsync();
             int totalPages = (int)Math.Ceiling(amount / pageSizeRequests);
             if (totalPages < 1) totalPages = 1;

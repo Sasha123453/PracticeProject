@@ -13,10 +13,18 @@ $(document).on("click", "#rejected-filter", function () {
 $(document).ready(function () {
     debugger;
     var params = new URLSearchParams(window.location.search);
-    var name = '#' + getFilterName(params) + '-filter';
-    $(name).addClass('active-filter');
+    for (let [key, value] of params) {
+        if (value === 'true') {
+            makeFilterActive(key);
+        }
+    }
+    if ($('.request').length = 0)
     debugger;
-})
+});
+function makeFilterActive(name) {
+    name = '#' + name + '-filter';
+    $(name).addClass('active-filter');
+}
 function getFilterName(queryString) {
     const params = new URLSearchParams(queryString);
     for (let [key, value] of params) {
@@ -36,15 +44,20 @@ $(document).on("click", "#reset-filters", function () {
 function applyFilter(filter) {
     debugger;
     var baseUrl = window.location.href.split('?')[0];
-    var params = new URLSearchParams();
-    params.set(filter, "true");
+    var params = new URLSearchParams(window.location.search);
+    if (params.has(filter)) params.delete(filter);
+    else params.append(filter, "true");
     params.set("page", "1");
     var url = baseUrl + "?" + params.toString();
     window.location.href = url;
 }
 function resetFilters() {
     var baseUrl = window.location.href.split('?')[0];
-    var url = baseUrl + "?" + "page=1";
+    var params = new URLSearchParams();
+    params.append("page", 1);
+    params.append("watched", "true");
+    params.append("nothing", "true");
+    var url = baseUrl + '?' + params.toString();
     window.location.href = url;
 }
 $(document).on("click", "#reject-button", function () {
