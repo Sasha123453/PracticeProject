@@ -61,3 +61,9 @@ h3 {
     resize: none;
     width: 30%;
 }
+
+.resource-pic 
+{
+    max-width: 75%;
+    margin: 0 auto;
+}
