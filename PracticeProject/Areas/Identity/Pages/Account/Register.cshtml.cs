@@ -120,7 +120,7 @@ namespace PracticeProject.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
             var captcha = await _googleCaptchaService.VerifyToken(Input.Token);
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && captcha)
             {
                 var user = CreateUser();
                 user.Nickname = Input.Nickname;
