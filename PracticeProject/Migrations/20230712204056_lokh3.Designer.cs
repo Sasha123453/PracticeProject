@@ -12,8 +12,8 @@ using PracticeProject.Areas.Identity.Data;
 namespace PracticeProject.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230708185650_again")]
-    partial class again
+    [Migration("20230712204056_lokh3")]
+    partial class lokh3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,8 +1,8 @@
 ﻿.user button,.user input{
     display: none;
 }
-.completed{
-    
+.completed {
+
 }
 .nothing{
     
@@ -12,6 +12,19 @@
 }
 .watched{
 
+}
+
+#completed-filter {
+    background-color: lightgreen;
+   
+}
+
+#rejected-filter {
+    background-color: lightcoral;
+}
+
+#completed-filter {
+    background-color: lightgreen;
 }
 
 .filters {
