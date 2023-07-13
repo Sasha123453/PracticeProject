@@ -25,7 +25,7 @@ namespace PracticeProject.Controllers
         private readonly GoogleCaptchaService _googleCaptchaService;
         private readonly IHubContext<CommentHub> _commentHubContext;
         const int pageSizeComments = 8;
-        const int pageSizeResources = 10;
+        const int pageSizeResources = 4;
         const int pageSizeRequests = 4;
         public ResourcesController(UserManager<User> userManager, ApplicationContext context, GoogleCaptchaService googleCaptchaService, IHubContext<CommentHub> commenthubContext, RoleManager<IdentityRole> roleManager)
         {
@@ -64,7 +64,6 @@ namespace PracticeProject.Controllers
         }
         public async Task<IActionResult> ShowResourcesPage(int page = 1)
         {
-            
             List<ResourceModel> resources = await GetResourcesFromDataSource(page);
             double resourcesAmount = await GetResourcesAmountFromDataSource();
             int totalPages = (int)Math.Ceiling(resourcesAmount / pageSizeResources);

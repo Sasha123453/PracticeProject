@@ -118,6 +118,7 @@ namespace PracticeProject.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+            var captcha = await _googleCaptchaService.VerifyToken(Input.Token);
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -126,8 +127,7 @@ namespace PracticeProject.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                var captcha = await _googleCaptchaService.VerifyToken(Input.Token);
-                if (result.Succeeded && captcha)
+                if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 

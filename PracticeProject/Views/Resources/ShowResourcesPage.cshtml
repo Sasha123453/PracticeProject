@@ -7,6 +7,7 @@
         <h2>@x.Name</h2>
         <img class="resource-pic" src="@Url.Content(path)" alt="Image" />
         <p>@x.ShortDescription</p>
+        <p>Тип: @x.Type</p>
         <form method="get" asp-controller="Resources" asp-action="ResourceById">
             <input id="Id-toSend" type="hidden" name="Id" value="@x.Id" />
             <input type="submit" value="Подробнее" />
